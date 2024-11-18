@@ -4,6 +4,9 @@ import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import AppRoutes from "./routes/index.jsx";
 import { Toaster } from "react-hot-toast";
+import { registerSW } from 'virtual:pwa-register'
+
+registerSW({ immediate: true })
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>

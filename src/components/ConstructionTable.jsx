@@ -66,7 +66,7 @@ export default function ConstructionTable({ data, activeWeek }) {
                 <div className="flex items-center w-full gap-2">
                     <h2 className="font-semibold text-[16px] uppercase">{data.code}</h2>
                     <span className="font-medium italic text-[#BEC3D2] text-[13px] capitalize">{data.name}</span>
-                    <button className="ml-auto" onClick={() => handleDeleteWork(data.id)}>X</button>
+                    {/* <button className="ml-auto" onClick={() => handleDeleteWork(data.id)}>X</button> */}
                 </div>
             </div>
             <table className="w-full border-collapse table-auto">
