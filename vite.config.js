@@ -8,7 +8,7 @@ export default defineConfig({
     react(),
     VitePWA({
       manifest: {
-        name: "Semanal",
+        name: "Less Reformas",
         icons: [
           {
             src: "/icons/lessIcon.png",
@@ -27,6 +27,6 @@ export default defineConfig({
     }),
   ],
   build: {
-    outDir: "build",
+    outDir: "dist",
   },
 });
