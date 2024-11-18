@@ -2,7 +2,7 @@ import { shortenedDay, getRange } from "../utils/day";
 import WorkDay from "./WorkDay";
 
 import useEmployeeModalStore from "../stores/useEmployeeModalStore";
-import { getUnallocatedEmployeesByConstruction } from "../service/apiService";
+import { deleteFullConstruction, getUnallocatedEmployeesByConstruction } from "../service/apiService";
 import { shortName } from "../utils/employee";
 
 import { motion } from "framer-motion";
@@ -21,8 +21,8 @@ const tableVariants = {
 };
 
 export default function ConstructionTable({ data, activeWeek }) {
-
     const { toggleEmployeeModal, setEmployees } = useEmployeeModalStore()
+    activeWeek.map((x) => console.log(moment.utc(x).format('yyyy-MM-DD')))
 
     const handleAddEmployee = async () => {
         toggleEmployeeModal()
@@ -40,6 +40,18 @@ export default function ConstructionTable({ data, activeWeek }) {
         setEmployees(result);
     }
 
+    async function handleDeleteWork(idConstruction) {
+        try {
+            const startDate = moment.utc(activeWeek[0]).format('yyyy-MM-DD');
+            const endDate = moment.utc(activeWeek[activeWeek.length -1 ]).format('yyyy-MM-DD');
+            const res = await deleteFullConstruction(idConstruction, startDate, endDate)
+
+            return res;
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <motion.div
             className="flex flex-col border-[1px] border-[#555555] rounded-[3px] bg-white"
@@ -53,6 +65,7 @@ export default function ConstructionTable({ data, activeWeek }) {
                 <div className="flex items-center gap-2">
                     <h2 className="font-semibold text-[16px] uppercase">{data.code}</h2>
                     <span className="font-medium italic text-[#BEC3D2] text-[13px] capitalize">{data.name}</span>
+                    {/* <button className="ml-auto" onClick={() => handleDeleteWork(data.id)}>X</button> */}
                 </div>
             </div>
             <table className="w-full border-collapse table-auto">

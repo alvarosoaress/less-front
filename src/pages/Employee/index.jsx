@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../../../supabaseClient';
 import { useNavigate } from 'react-router-dom';
@@ -8,22 +6,20 @@ import EmployeeCreate from '../Employee/EmployeeCreate';
 import EmployeeCard from '../../components/EmployeeCard';
 import Button from '../../components/Button';
 import { AnimatePresence } from 'framer-motion';
+import toast from 'react-hot-toast';
 
 const Employee = () => {
-
     const [user, setUser] = useState(null);
-
+    
     const [employees, setEmployees] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const employeesPerPage = 7;
-
+    
     const [showEmployeeCreate, setShowEmployeeCreate] = useState(false);
     const [showEditEmployee, setShowEditEmployee] = useState(false);
     const [employeeInfo, setEmployeeInfo] = useState(null);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
-
+    
     const [reload, setReload] = useState(0)
-
+    
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -47,24 +43,12 @@ const Employee = () => {
             if (error) {
                 console.error('Erro ao buscar funcionários:', error.message);
             } else {
-                console.log(data.sort((a,b) => a.name > b.name))
                 setEmployees(data);
             }
         };
         fetchEmployees();
     }, [reload]);
 
-    const indexOfLastEmployee = currentPage * employeesPerPage;
-    const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
-    const currentEmployees = employees.slice(indexOfFirstEmployee, indexOfLastEmployee);
-
-    const totalPages = Math.ceil(employees.length / employeesPerPage);
-
-    const handlePageChange = (pageNumber) => {
-        if (pageNumber >= 1 && pageNumber <= totalPages) {
-            setCurrentPage(pageNumber);
-        }
-    };
 
     // Função para selecionar um funcionário e exibir detalhes
     const handleSelectEmployee = (employee) => {
@@ -81,9 +65,10 @@ const Employee = () => {
             .eq('id', employeeInfo.id);
 
         if (error) {
-            console.error('Erro ao deletar o funcionário:', error.message);
+            setEmployeeInfo(null);
+            setShowDeleteModal(false);
+            toast.error('Existem dados relacionados ao funcionário.')
         } else {
-
             setEmployees((prev) => prev.filter((e) => e.id !== employeeInfo.id));
             setEmployeeInfo(null);
             setShowDeleteModal(false);
@@ -144,12 +129,14 @@ const Employee = () => {
                         onClose={() => {
                             setShowEditEmployee(false);
                             handleSelectEmployee(employeeInfo);
+                            setReload(reload + 1);
                         }}
                         onEmployeeUpdated={(updatedEmployee) => {
                             setEmployees((prev) =>
                                 prev.map((e) => (e.id === updatedEmployee.id ? updatedEmployee : e))
                             );
                             setEmployeeInfo(updatedEmployee);
+                            setReload(reload + 1)
                         }}
                     />
                 )}

@@ -2,21 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { supabase } from '../../../supabaseClient';
 import ConstructionCreate from '../Construction/ConstructionCreate';
 import ConstructionEdit from '../Construction/ConstructionEdit';
-import { useNavigate } from "react-router-dom";
 import ConstructionCard from '../../components/ConstructionCard';
 import { AnimatePresence } from 'framer-motion';
 
 import Button from "../../components/Button"
+import toast from 'react-hot-toast';
 
 const Construction = () => {
     // Gerenciamento de construction e paginação
     const [constructions, setConstructions] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const constructionsPerPage = 7;
 
     const [showConstructionCreate, setShowConstructionCreate] = useState(false);
     const [showEditConstruction, setShowEditConstruction] = useState(false);
-    const [selectedConstruction, setSelectedConstruction] = useState(null);
     const [constructionInfo, setConstructionInfo] = useState(null);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
 
@@ -26,21 +23,13 @@ const Construction = () => {
         const fetchConstructions = async () => {
             const { data, error } = await supabase.from('construction').select('*');
             if (error) console.error('Erro ao buscar obras:', error.message);
-            else setConstructions(data);
+            else {
+                let sortedData = data.sort((a,b) => a.name > b.name)
+                setConstructions(sortedData)
+            };
         };
         fetchConstructions();
     }, [reload]);
-
-    const indexOfLastConstruction = currentPage * constructionsPerPage;
-    const indexOfFirstConstruction = indexOfLastConstruction - constructionsPerPage;
-    const currentConstructions = constructions.slice(indexOfFirstConstruction, indexOfLastConstruction);
-
-    const totalPages = Math.ceil(constructions.length / constructionsPerPage);
-    const handlePageChange = (pageNumber) => {
-        if (pageNumber >= 1 && pageNumber <= totalPages) {
-            setCurrentPage(pageNumber);
-        }
-    };
 
     const handleDeleteConstruction = async () => {
         if (!constructionInfo) return;
@@ -51,10 +40,12 @@ const Construction = () => {
             .eq('id', constructionInfo.id);
 
         if (error) {
-            console.error('Erro ao deletar a obra:', error.message);
+            setConstructionInfo(null);
+            setShowDeleteModal(false);
+            toast.error('Existem dados relacionados à obra.')
         } else {
             setConstructions((prev) =>
-                prev.filter((construction) => construction.id !== constructionInfo.id)
+                prev.filter((construction) => construction.id !== constructionInfo.id).sort((a,b) => a.name > b.name)
             );
             setConstructionInfo(null);
             setShowDeleteModal(false);
@@ -69,14 +60,15 @@ const Construction = () => {
         setConstructions((prev) =>
             prev.map((construction) =>
                 construction.id === updatedConstruction.id ? updatedConstruction : construction
-            )
+            ).sort((a,b) => a.name > b.name)
         );
         setConstructionInfo(updatedConstruction);
+        setReload(reload + 1);
     };
 
     return (
-        <div className="flex flex-col h-full w-full items-center p-2 overflow-y-scroll">
-            <div className='flex flex-col gap-3 w-full h-full overflow-y-scroll'>
+        <div className="flex flex-col items-center w-full h-full p-2 overflow-y-scroll">
+            <div className='flex flex-col w-full h-full gap-3 overflow-y-scroll'>
                 <AnimatePresence>
                     {constructions.map(cons =>
                         <ConstructionCard
@@ -98,7 +90,7 @@ const Construction = () => {
                 <Button
                     title="+"
                     enabled={true}
-                    className="w-full py-2 rounded-md font-extrabold"
+                    className="w-full py-2 font-extrabold rounded-md"
                     onClick={() => setShowConstructionCreate(true)}
                 />
             </div>
@@ -123,7 +115,10 @@ const Construction = () => {
                 {showEditConstruction && (
                     <ConstructionEdit
                         constructionId={constructionInfo?.id}
-                        onClose={() => setShowEditConstruction(false)}
+                        onClose={() => {
+                            setShowEditConstruction(false)
+                            setReload(reload + 1);
+                        }}
                         onConstructionUpdated={updateConstructionInfo} // Passando a função para atualizar
                     />
                 )}
@@ -131,21 +126,21 @@ const Construction = () => {
 
             {/* Modal de confirmação para deletar obra */}
             {showDeleteModal && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                    <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm">
-                        <p className="text-center text-gray-700 mb-4">
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+                    <div className="max-w-sm p-6 bg-white rounded-lg shadow-lg">
+                        <p className="mb-4 text-center text-gray-700">
                             Tem certeza que deseja deletar esta obra?
                         </p>
                         <div className="flex justify-center space-x-4">
                             <button
                                 onClick={handleDeleteConstruction}
-                                className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 transition"
+                                className="px-4 py-2 text-white transition bg-red-500 rounded hover:bg-red-600"
                             >
                                 Deletar
                             </button>
                             <button
                                 onClick={() => setShowDeleteModal(false)}
-                                className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600 transition"
+                                className="px-4 py-2 text-white transition bg-gray-500 rounded hover:bg-gray-600"
                             >
                                 Cancelar
                             </button>
