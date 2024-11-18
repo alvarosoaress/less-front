@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: "Work Sans", system-ui, sans-serif;
+  }
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+*::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+* {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.no-select {
+  user-select: none;  /* Impede a seleção de texto */
+  -webkit-user-select: none; /* Para navegadores Webkit (Safari, Chrome) */
+  -ms-user-select: none; /* Para IE10+ */
+  -moz-user-select: none; /* Para Firefox */
+}
+
+.react-calendar {
+  font-family: "Work Sans", system-ui, sans-serif !important;
+}
+
+.react-calendar__tile--now:enabled:focus, .react-calendar__tile--now{
+  background: rgba(59, 130, 246) !important;
+}
+
+.react-calendar__tile--now:enabled:hover {
+  background: rgba(113, 162, 240, 0.479) !important;
+}
+
+.react-calendar__tile--active:enabled:hover, .react-calendar__tile--active:enabled:focus, .react-calendar__tile--active{
+  background: rgba(0, 165, 110, 0.726) !important;
+}
+
+.react-calendar__tile:enabled:hover {
+  background: #e6e6e6 !important;
+}
+
+.react-calendar__month-view__weekNumbers {
+  font-style: italic !important;
+  color: #908C8C !important;
+  font-weight: 300 !important;
+}
+
+abbr:where([title]) {
+  text-decoration: none !important;
+}
+
+.calendarOpen {
+  visibility: visible;
+  transform: translateY(0);
+  opacity: 1;
+  transition: transform 500ms ease-in-out, opacity 500ms ease-in-out;
+  position: relative; /* No fluxo do layout quando aberto */
+}
+
+.calendarClosed {
+  visibility: hidden;
+  transform: translateY(-20%);
+  opacity: 0;
+  transition: transform 500ms ease-in-out, opacity 500ms ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+}

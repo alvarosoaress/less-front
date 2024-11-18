@@ -1,0 +1,14 @@
+.tabelaFunc {
+  width: 100%;
+  border-collapse: collapse;
+
+  th {
+    border: 1px solid gainsboro;
+    font-weight: normal;
+  }
+
+  td {
+    border: 1px solid gainsboro;
+    padding-block: 5px;
+  }
+}

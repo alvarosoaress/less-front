@@ -1,0 +1,52 @@
+.content-constructionModal {
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 500ms ease-in-out, opacity 500ms ease-in-out;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+  min-height: 250px;
+  gap: 15px;
+  padding: 10px;
+  border-radius: 15px;
+}
+
+.content-constructionModal--after-open {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.content-constructionModal--before-close {
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+.overlay-constructionModal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  opacity: 0;
+  transition: opacity 500ms ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0,0,0,0.6);
+}
+
+.overlay-constructionModal--after-open {
+  opacity: 1;
+}
+
+.overlay-constructionModal--before-close {
+  opacity: 0;
+}
+
+.stop-scrolling {
+  height: 100%;
+  overflow-y: hidden;
+}

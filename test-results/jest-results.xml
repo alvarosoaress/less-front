@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="29" failures="4" errors="0" time="4.236">
+  <testsuite name="ConstructionCreate Component" errors="0" failures="0" skipped="0" timestamp="2024-10-21T20:25:49" time="0.785" tests="4">
+    <testcase classname="ConstructionCreate Component Deve renderizar o formulário corretamente" name="ConstructionCreate Component Deve renderizar o formulário corretamente" time="0.122">
+    </testcase>
+    <testcase classname="ConstructionCreate Component Deve cadastrar uma obra com sucesso" name="ConstructionCreate Component Deve cadastrar uma obra com sucesso" time="0.063">
+    </testcase>
+    <testcase classname="ConstructionCreate Component Deve lidar com erro ao cadastrar obra" name="ConstructionCreate Component Deve lidar com erro ao cadastrar obra" time="0.067">
+    </testcase>
+    <testcase classname="ConstructionCreate Component Deve fechar o modal ao clicar em cancelar" name="ConstructionCreate Component Deve fechar o modal ao clicar em cancelar" time="0.006">
+    </testcase>
+  </testsuite>
+  <testsuite name="EditUser Component" errors="0" failures="0" skipped="0" timestamp="2024-10-21T20:25:49" time="0.801" tests="9">
+    <testcase classname="EditUser Component Deve renderizar sem travar/quebrar o fluxo de renderização" name="EditUser Component Deve renderizar sem travar/quebrar o fluxo de renderização" time="0.035">
+    </testcase>
+    <testcase classname="EditUser Component Deve atualizar o e-mail e a senha do usuário" name="EditUser Component Deve atualizar o e-mail e a senha do usuário" time="0.127">
+    </testcase>
+    <testcase classname="EditUser Component Deve lidar com erro de atualização do usuário" name="EditUser Component Deve lidar com erro de atualização do usuário" time="0.018">
+    </testcase>
+    <testcase classname="EditUser Component Deve excluir conta de usuário" name="EditUser Component Deve excluir conta de usuário" time="0.016">
+    </testcase>
+    <testcase classname="EditUser Component Deve lidar com erro ao obter a sessão antes de excluir a conta" name="EditUser Component Deve lidar com erro ao obter a sessão antes de excluir a conta" time="0.013">
+    </testcase>
+    <testcase classname="EditUser Component Deve lidar com erro inesperado ao excluir conta de usuário" name="EditUser Component Deve lidar com erro inesperado ao excluir conta de usuário" time="0.009">
+    </testcase>
+    <testcase classname="EditUser Component Deve lidar com erro de exclusão de conta" name="EditUser Component Deve lidar com erro de exclusão de conta" time="0.008">
+    </testcase>
+    <testcase classname="EditUser Component Deve navegar para a página principal ao clicar em &quot;Cancelar&quot;" name="EditUser Component Deve navegar para a página principal ao clicar em &quot;Cancelar&quot;" time="0.032">
+    </testcase>
+    <testcase classname="EditUser Component Não deve excluir conta se o usuário cancelar a confirmação" name="EditUser Component Não deve excluir conta se o usuário cancelar a confirmação" time="0.007">
+    </testcase>
+  </testsuite>
+  <testsuite name="Login Component" errors="0" failures="0" skipped="0" timestamp="2024-10-21T20:25:49" time="1.288" tests="10">
+    <testcase classname="Login Component Renderiza o formulário de login corretamente" name="Login Component Renderiza o formulário de login corretamente" time="0.033">
+    </testcase>
+    <testcase classname="Login Component Exibe erro ao falhar no login" name="Login Component Exibe erro ao falhar no login" time="0.085">
+    </testcase>
+    <testcase classname="Login Component Login bem-sucedido navega para a página inicial" name="Login Component Login bem-sucedido navega para a página inicial" time="0.029">
+    </testcase>
+    <testcase classname="Login Component Renderiza o formulário de registro quando o modo de registro é ativado" name="Login Component Renderiza o formulário de registro quando o modo de registro é ativado" time="0.026">
+    </testcase>
+    <testcase classname="Login Component Exibe erro ao falhar no registro" name="Login Component Exibe erro ao falhar no registro" time="0.018">
+    </testcase>
+    <testcase classname="Login Component Registro bem-sucedido exibe mensagem de confirmação" name="Login Component Registro bem-sucedido exibe mensagem de confirmação" time="0.018">
+    </testcase>
+    <testcase classname="Login Component Exibe mensagem de erro se o e-mail estiver inválido" name="Login Component Exibe mensagem de erro se o e-mail estiver inválido" time="0.012">
+    </testcase>
+    <testcase classname="Login Component Exibe mensagem de erro se a senha estiver inválida" name="Login Component Exibe mensagem de erro se a senha estiver inválida" time="0.01">
+    </testcase>
+    <testcase classname="Login Component Exibe erro ao inserir credenciais inválidas" name="Login Component Exibe erro ao inserir credenciais inválidas" time="0.009">
+    </testcase>
+    <testcase classname="Login Component Exibe a mensagem &quot;Carregando...&quot; durante o login" name="Login Component Exibe a mensagem &quot;Carregando...&quot; durante o login" time="0.511">
+    </testcase>
+  </testsuite>
+  <testsuite name="ConstructionEdit Component" errors="0" failures="4" skipped="0" timestamp="2024-10-21T20:25:49" time="3.836" tests="6">
+    <testcase classname="ConstructionEdit Component Deve buscar e preencher os dados da obra corretamente" name="ConstructionEdit Component Deve buscar e preencher os dados da obra corretamente" time="0.035">
+    </testcase>
+    <testcase classname="ConstructionEdit Component Deve atualizar uma obra com sucesso" name="ConstructionEdit Component Deve atualizar uma obra com sucesso" time="1.128">
+      <failure>Error: expect(jest.fn()).toHaveBeenCalledWith(...expected)
+
+Expected: {&quot;address&quot;: &quot;Rua Atualizada&quot;, &quot;code&quot;: &quot;002&quot;, &quot;name&quot;: &quot;Obra Atualizada&quot;}
+
+Number of calls: 0
+
+Ignored nodes: comments, script, style
+&lt;html&gt;
+  &lt;head /&gt;
+  &lt;body&gt;
+    &lt;div&gt;
+      &lt;div
+        class=&quot;fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center&quot;
+      &gt;
+        &lt;div
+          class=&quot;bg-white p-8 rounded-lg shadow-md w-full max-w-sm&quot;
+        &gt;
+          &lt;h2
+            class=&quot;text-2xl font-bold mb-4&quot;
+          &gt;
+            Editar Obra
+          &lt;/h2&gt;
+          &lt;form&gt;
+            &lt;div
+              class=&quot;mb-4&quot;
+            &gt;
+              &lt;label
+                class=&quot;block text-gray-700&quot;
+                for=&quot;codigo&quot;
+              &gt;
+                Código
+              &lt;/label&gt;
+              &lt;input
+                class=&quot;w-full p-2 border border-gray-300 rounded mt-1&quot;
+                id=&quot;codigo&quot;
+                required=&quot;&quot;
+                type=&quot;text&quot;
+                value=&quot;001&quot;
+              /&gt;
+            &lt;/div&gt;
+            &lt;div
+              class=&quot;mb-4&quot;
+            &gt;
+              &lt;label
+                class=&quot;block text-gray-700&quot;
+                for=&quot;apelido&quot;
+              &gt;
+                Apelido
+              &lt;/label&gt;
+              &lt;input
+                class=&quot;w-full p-2 border border-gray-300 rounded mt-1&quot;
+                id=&quot;apelido&quot;
+                required=&quot;&quot;
+                type=&quot;text&quot;
+                value=&quot;Obra Teste&quot;
+              /&gt;
+            &lt;/div&gt;
+            &lt;div
+              class=&quot;mb-4&quot;
+            &gt;
+              &lt;label
+                class=&quot;block text-gray-700&quot;
+                for=&quot;endereco&quot;
+              &gt;
+                Endereço
+              &lt;/label&gt;
+              &lt;input
+                class=&quot;w-full p-2 border border-gray-300 rounded mt-1&quot;
+                id=&quot;endereco&quot;
+                type=&quot;text&quot;
+                value=&quot;Rua Teste&quot;
+              /&gt;
+            &lt;/div&gt;
+            &lt;button
+              class=&quot;w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition-colors&quot;
+              type=&quot;submit&quot;
+            &gt;
+              Atualizar
+            &lt;/button&gt;
+          &lt;/form&gt;
+          &lt;button
+            class=&quot;w-full bg-red-500 text-white py-2 rounded hover:bg-red-600 transition-colors mt-4&quot;
+          &gt;
+            Deletar Obra
+          &lt;/button&gt;
+          &lt;button
+            class=&quot;w-full bg-gray-500 text-white py-2 rounded hover:bg-gray-600 transition-colors mt-2&quot;
+          &gt;
+            Cancelar
+          &lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+    at toHaveBeenCalledWith (/Users/carlosreinis/Projects/pmv-ads-2024-2-e5-proj-empext-t2-pmv-ads-2024-2-e5-g4-proj-less-reformas/codigo-fonte/web/src/pages/Construction/ConstructionEdit.test.js:68:38)
+    at runWithExpensiveErrorDiagnosticsDisabled (/Users/carlosreinis/Projects/pmv-ads-2024-2-e5-proj-empext-t2-pmv-ads-2024-2-e5-g4-proj-less-reformas/codigo-fonte/web/node_modules/@testing-library/dom/dist/config.js:47:12)
+    at checkCallback (/Users/carlosreinis/Projects/pmv-ads-2024-2-e5-proj-empext-t2-pmv-ads-2024-2-e5-g4-proj-less-reformas/codigo-fonte/web/node_modules/@testing-library/dom/dist/wait-for.js:124:77)
+    at checkRealTimersCallback (/Users/carlosreinis/Projects/pmv-ads-2024-2-e5-proj-empext-t2-pmv-ads-2024-2-e5-g4-proj-less-reformas/codigo-fonte/web/node_modules/@testing-library/dom/dist/wait-for.js:118:16)
+    at Timeout.task [as _onTimeout] (/Users/carlosreinis/Projects/pmv-ads-2024-2-e5-proj-empext-t2-pmv-ads-2024-2-e5-g4-proj-less-reformas/codigo-fonte/web/node_modules/jsdom/lib/jsdom/browser/Window.js:520:19)
+    at listOnTimeout (node:internal/timers:594:17)
+    at processTimers (node:internal/timers:529:7)</failure>
+    </testcase>
+    <testcase classname="ConstructionEdit Component Deve lidar com erro ao atualizar obra" name="ConstructionEdit Component Deve lidar com erro ao atualizar obra" time="1.022">
+      <failure>Error: expect(jest.fn()).toHaveBeenCalled()
+
+Expected number of calls: &gt;= 1
+Received number of calls:    0
+
+Ignored nodes: comments, script, style
+&lt;html&gt;
+  &lt;head /&gt;
+  &lt;body&gt;
+    &lt;div&gt;
+      &lt;div
+        class=&quot;fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center&quot;
+      &gt;
+        &lt;div
+          class=&quot;bg-white p-8 rounded-lg shadow-md w-full max-w-sm&quot;
+        &gt;
+          &lt;h2
+            class=&quot;text-2xl font-bold mb-4&quot;
+          &gt;
+            Editar Obra
+          &lt;/h2&gt;
+          &lt;form&gt;
+            &lt;div
+              class=&quot;mb-4&quot;
+            &gt;
+              &lt;label
+                class=&quot;block text-gray-700&quot;
+                for=&quot;codigo&quot;
+              &gt;
+                Código
+              &lt;/label&gt;
+              &lt;input
+                class=&quot;w-full p-2 border border-gray-300 rounded mt-1&quot;
+                id=&quot;codigo&quot;
+                required=&quot;&quot;
+                type=&quot;text&quot;
+                value=&quot;001&quot;
+              /&gt;
+            &lt;/div&gt;
+            &lt;div
+              class=&quot;mb-4&quot;
+            &gt;
+              &lt;label
+                class=&quot;block text-gray-700&quot;
+                for=&quot;apelido&quot;
+              &gt;
+                Apelido
+              &lt;/label&gt;
+              &lt;input
+                class=&quot;w-full p-2 border border-gray-300 rounded mt-1&quot;
+                id=&quot;apelido&quot;
+                required=&quot;&quot;
+                type=&quot;text&quot;
+                value=&quot;Obra Teste&quot;
+              /&gt;
+            &lt;/div&gt;
+            &lt;div
+              class=&quot;mb-4&quot;
+            &gt;
+              &lt;label
+                class=&quot;block text-gray-700&quot;
+                for=&quot;endereco&quot;
+              &gt;
+                Endereço
+              &lt;/label&gt;
+              &lt;input
+                class=&quot;w-full p-2 border border-gray-300 rounded mt-1&quot;
+                id=&quot;endereco&quot;
+                type=&quot;text&quot;
+                value=&quot;Rua Teste&quot;
+              /&gt;
+            &lt;/div&gt;
+            &lt;button
+              class=&quot;w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition-colors&quot;
+              type=&quot;submit&quot;
+            &gt;
+              Atualizar
+            &lt;/button&gt;
+          &lt;/form&gt;
+          &lt;button
+            class=&quot;w-full bg-red-500 text-white py-2 rounded hover:bg-red-600 transition-colors mt-4&quot;
+          &gt;
+            Deletar Obra
+          &lt;/button&gt;
+          &lt;button
+            class=&quot;w-full bg-gray-500 text-white py-2 rounded hover:bg-gray-600 transition-colors mt-2&quot;
+          &gt;
+            Cancelar
+          &lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+    at toHaveBeenCalled (/Users/carlosreinis/Projects/pmv-ads-2024-2-e5-proj-empext-t2-pmv-ads-2024-2-e5-g4-proj-less-reformas/codigo-fonte/web/src/pages/Construction/ConstructionEdit.test.js:94:38)
+    at runWithExpensiveErrorDiagnosticsDisabled (/Users/carlosreinis/Projects/pmv-ads-2024-2-e5-proj-empext-t2-pmv-ads-2024-2-e5-g4-proj-less-reformas/codigo-fonte/web/node_modules/@testing-library/dom/dist/config.js:47:12)
+    at checkCallback (/Users/carlosreinis/Projects/pmv-ads-2024-2-e5-proj-empext-t2-pmv-ads-2024-2-e5-g4-proj-less-reformas/codigo-fonte/web/node_modules/@testing-library/dom/dist/wait-for.js:124:77)
+    at checkRealTimersCallback (/Users/carlosreinis/Projects/pmv-ads-2024-2-e5-proj-empext-t2-pmv-ads-2024-2-e5-g4-proj-less-reformas/codigo-fonte/web/node_modules/@testing-library/dom/dist/wait-for.js:118:16)
+    at Timeout.task [as _onTimeout] (/Users/carlosreinis/Projects/pmv-ads-2024-2-e5-proj-empext-t2-pmv-ads-2024-2-e5-g4-proj-less-reformas/codigo-fonte/web/node_modules/jsdom/lib/jsdom/browser/Window.js:520:19)
+    at listOnTimeout (node:internal/timers:594:17)
+    at processTimers (node:internal/timers:529:7)</failure>
+    </testcase>
+    <testcase classname="ConstructionEdit Component Deve deletar uma obra com sucesso" name="ConstructionEdit Component Deve deletar uma obra com sucesso" time="1.023">
+      <failure>Error: expect(jest.fn()).toHaveBeenCalledWith(...expected)
+
+Expected: Anything
+
+Number of calls: 0
+
+Ignored nodes: comments, script, style
+&lt;html&gt;
+  &lt;head /&gt;
+  &lt;body&gt;
+    &lt;div&gt;
+      &lt;div
+        class=&quot;fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center&quot;
+      &gt;
+        &lt;div
+          class=&quot;bg-white p-8 rounded-lg shadow-md w-full max-w-sm&quot;
+        &gt;
+          &lt;h2
+            class=&quot;text-2xl font-bold mb-4&quot;
+          &gt;
+            Editar Obra
+          &lt;/h2&gt;
+          &lt;form&gt;
+            &lt;div
+              class=&quot;mb-4&quot;
+            &gt;
+              &lt;label
+                class=&quot;block text-gray-700&quot;
+                for=&quot;codigo&quot;
+              &gt;
+                Código
+              &lt;/label&gt;
+              &lt;input
+                class=&quot;w-full p-2 border border-gray-300 rounded mt-1&quot;
+                id=&quot;codigo&quot;
+                required=&quot;&quot;
+                type=&quot;text&quot;
+                value=&quot;001&quot;
+              /&gt;
+            &lt;/div&gt;
+            &lt;div
+              class=&quot;mb-4&quot;
+            &gt;
+              &lt;label
+                class=&quot;block text-gray-700&quot;
+                for=&quot;apelido&quot;
+              &gt;
+                Apelido
+              &lt;/label&gt;
+              &lt;input
+                class=&quot;w-full p-2 border border-gray-300 rounded mt-1&quot;
+                id=&quot;apelido&quot;
+                required=&quot;&quot;
+                type=&quot;text&quot;
+                value=&quot;Obra Teste&quot;
+              /&gt;
+            &lt;/div&gt;
+            &lt;div
+              class=&quot;mb-4&quot;
+            &gt;
+              &lt;label
+                class=&quot;block text-gray-700&quot;
+                for=&quot;endereco&quot;
+              &gt;
+                Endereço
+              &lt;/label&gt;
+              &lt;input
+                class=&quot;w-full p-2 border border-gray-300 rounded mt-1&quot;
+                id=&quot;endereco&quot;
+                type=&quot;text&quot;
+                value=&quot;Rua Teste&quot;
+              /&gt;
+            &lt;/div&gt;
+            &lt;button
+              class=&quot;w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition-colors&quot;
+              type=&quot;submit&quot;
+            &gt;
+              Atualizar
+            &lt;/button&gt;
+          &lt;/form&gt;
+          &lt;button
+            class=&quot;w-full bg-red-500 text-white py-2 rounded hover:bg-red-600 transition-colors mt-4&quot;
+          &gt;
+            Deletar Obra
+          &lt;/button&gt;
+          &lt;button
+            class=&quot;w-full bg-gray-500 text-white py-2 rounded hover:bg-gray-600 transition-colors mt-2&quot;
+          &gt;
+            Cancelar
+          &lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+    at toHaveBeenCalledWith (/Users/carlosreinis/Projects/pmv-ads-2024-2-e5-proj-empext-t2-pmv-ads-2024-2-e5-g4-proj-less-reformas/codigo-fonte/web/src/pages/Construction/ConstructionEdit.test.js:107:38)
+    at runWithExpensiveErrorDiagnosticsDisabled (/Users/carlosreinis/Projects/pmv-ads-2024-2-e5-proj-empext-t2-pmv-ads-2024-2-e5-g4-proj-less-reformas/codigo-fonte/web/node_modules/@testing-library/dom/dist/config.js:47:12)
+    at checkCallback (/Users/carlosreinis/Projects/pmv-ads-2024-2-e5-proj-empext-t2-pmv-ads-2024-2-e5-g4-proj-less-reformas/codigo-fonte/web/node_modules/@testing-library/dom/dist/wait-for.js:124:77)
+    at checkRealTimersCallback (/Users/carlosreinis/Projects/pmv-ads-2024-2-e5-proj-empext-t2-pmv-ads-2024-2-e5-g4-proj-less-reformas/codigo-fonte/web/node_modules/@testing-library/dom/dist/wait-for.js:118:16)
+    at Timeout.task [as _onTimeout] (/Users/carlosreinis/Projects/pmv-ads-2024-2-e5-proj-empext-t2-pmv-ads-2024-2-e5-g4-proj-less-reformas/codigo-fonte/web/node_modules/jsdom/lib/jsdom/browser/Window.js:520:19)
+    at listOnTimeout (node:internal/timers:594:17)
+    at processTimers (node:internal/timers:529:7)</failure>
+    </testcase>
+    <testcase classname="ConstructionEdit Component Deve fechar o modal ao clicar em cancelar" name="ConstructionEdit Component Deve fechar o modal ao clicar em cancelar" time="0.019">
+    </testcase>
+    <testcase classname="ConstructionEdit Component Deve abrir o modal de edição ao selecionar uma obra existente" name="ConstructionEdit Component Deve abrir o modal de edição ao selecionar uma obra existente" time="0.048">
+      <failure>TestingLibraryElementError: Unable to find an accessible element with the role &quot;button&quot; and name `/Editar/i`
+
+Here are the accessible roles:
+
+  heading:
+
+  Name &quot;Editar Obra&quot;:
+  &lt;h2
+    class=&quot;text-2xl font-bold mb-4&quot;
+  /&gt;
+
+  --------------------------------------------------
+  textbox:
+
+  Name &quot;Código&quot;:
+  &lt;input
+    class=&quot;w-full p-2 border border-gray-300 rounded mt-1&quot;
+    id=&quot;codigo&quot;
+    required=&quot;&quot;
+    type=&quot;text&quot;
+    value=&quot;001&quot;
+  /&gt;
+
+  Name &quot;Apelido&quot;:
+  &lt;input
+    class=&quot;w-full p-2 border border-gray-300 rounded mt-1&quot;
+    id=&quot;apelido&quot;
+    required=&quot;&quot;
+    type=&quot;text&quot;
+    value=&quot;Obra Teste&quot;
+  /&gt;
+
+  Name &quot;Endereço&quot;:
+  &lt;input
+    class=&quot;w-full p-2 border border-gray-300 rounded mt-1&quot;
+    id=&quot;endereco&quot;
+    type=&quot;text&quot;
+    value=&quot;Rua Teste&quot;
+  /&gt;
+
+  --------------------------------------------------
+  button:
+
+  Name &quot;Atualizar&quot;:
+  &lt;button
+    class=&quot;w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition-colors&quot;
+    type=&quot;submit&quot;
+  /&gt;
+
+  Name &quot;Deletar Obra&quot;:
+  &lt;button
+    class=&quot;w-full bg-red-500 text-white py-2 rounded hover:bg-red-600 transition-colors mt-4&quot;
+  /&gt;
+
+  Name &quot;Cancelar&quot;:
+  &lt;button
+    class=&quot;w-full bg-gray-500 text-white py-2 rounded hover:bg-gray-600 transition-colors mt-2&quot;
+  /&gt;
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center&quot;
+    &gt;
+      &lt;div
+        class=&quot;bg-white p-8 rounded-lg shadow-md w-full max-w-sm&quot;
+      &gt;
+        &lt;h2
+          class=&quot;text-2xl font-bold mb-4&quot;
+        &gt;
+          Editar Obra
+        &lt;/h2&gt;
+        &lt;form&gt;
+          &lt;div
+            class=&quot;mb-4&quot;
+          &gt;
+            &lt;label
+              class=&quot;block text-gray-700&quot;
+              for=&quot;codigo&quot;
+            &gt;
+              Código
+            &lt;/label&gt;
+            &lt;input
+              class=&quot;w-full p-2 border border-gray-300 rounded mt-1&quot;
+              id=&quot;codigo&quot;
+              required=&quot;&quot;
+              type=&quot;text&quot;
+              value=&quot;001&quot;
+            /&gt;
+          &lt;/div&gt;
+          &lt;div
+            class=&quot;mb-4&quot;
+          &gt;
+            &lt;label
+              class=&quot;block text-gray-700&quot;
+              for=&quot;apelido&quot;
+            &gt;
+              Apelido
+            &lt;/label&gt;
+            &lt;input
+              class=&quot;w-full p-2 border border-gray-300 rounded mt-1&quot;
+              id=&quot;apelido&quot;
+              required=&quot;&quot;
+              type=&quot;text&quot;
+              value=&quot;Obra Teste&quot;
+            /&gt;
+          &lt;/div&gt;
+          &lt;div
+            class=&quot;mb-4&quot;
+          &gt;
+            &lt;label
+              class=&quot;block text-gray-700&quot;
+              for=&quot;endereco&quot;
+            &gt;
+              Endereço
+            &lt;/label&gt;
+            &lt;input
+              class=&quot;w-full p-2 border border-gray-300 rounded mt-1&quot;
+              id=&quot;endereco&quot;
+              type=&quot;text&quot;
+              value=&quot;Rua Teste&quot;
+            /&gt;
+          &lt;/div&gt;
+          &lt;button
+            class=&quot;w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600 transition-colors&quot;
+            type=&quot;submit&quot;
+          &gt;
+            Atualizar
+          &lt;/button&gt;
+        &lt;/form&gt;
+        &lt;button
+          class=&quot;w-full bg-red-500 text-white py-2 rounded hover:bg-red-600 transition-colors mt-4&quot;
+        &gt;
+          Deletar Obra
+        &lt;/button&gt;
+        &lt;button
+          class=&quot;w-full bg-gray-500 text-white py-2 rounded hover:bg-gray-600 transition-colors mt-2&quot;
+        &gt;
+          Cancelar
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+    at Object.getElementError (/Users/carlosreinis/Projects/pmv-ads-2024-2-e5-proj-empext-t2-pmv-ads-2024-2-e5-g4-proj-less-reformas/codigo-fonte/web/node_modules/@testing-library/dom/dist/config.js:37:19)
+    at /Users/carlosreinis/Projects/pmv-ads-2024-2-e5-proj-empext-t2-pmv-ads-2024-2-e5-g4-proj-less-reformas/codigo-fonte/web/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+    at /Users/carlosreinis/Projects/pmv-ads-2024-2-e5-proj-empext-t2-pmv-ads-2024-2-e5-g4-proj-less-reformas/codigo-fonte/web/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+    at /Users/carlosreinis/Projects/pmv-ads-2024-2-e5-proj-empext-t2-pmv-ads-2024-2-e5-g4-proj-less-reformas/codigo-fonte/web/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+    at getByRole (/Users/carlosreinis/Projects/pmv-ads-2024-2-e5-proj-empext-t2-pmv-ads-2024-2-e5-g4-proj-less-reformas/codigo-fonte/web/src/pages/Construction/ConstructionEdit.test.js:137:28)
+    at call (/Users/carlosreinis/Projects/pmv-ads-2024-2-e5-proj-empext-t2-pmv-ads-2024-2-e5-g4-proj-less-reformas/codigo-fonte/web/src/pages/Construction/ConstructionEdit.test.js:2:1)
+    at Generator.tryCatch (/Users/carlosreinis/Projects/pmv-ads-2024-2-e5-proj-empext-t2-pmv-ads-2024-2-e5-g4-proj-less-reformas/codigo-fonte/web/src/pages/Construction/ConstructionEdit.test.js:2:1)
+    at Generator._invoke [as next] (/Users/carlosreinis/Projects/pmv-ads-2024-2-e5-proj-empext-t2-pmv-ads-2024-2-e5-g4-proj-less-reformas/codigo-fonte/web/src/pages/Construction/ConstructionEdit.test.js:2:1)
+    at asyncGeneratorStep (/Users/carlosreinis/Projects/pmv-ads-2024-2-e5-proj-empext-t2-pmv-ads-2024-2-e5-g4-proj-less-reformas/codigo-fonte/web/src/pages/Construction/ConstructionEdit.test.js:2:1)
+    at asyncGeneratorStep (/Users/carlosreinis/Projects/pmv-ads-2024-2-e5-proj-empext-t2-pmv-ads-2024-2-e5-g4-proj-less-reformas/codigo-fonte/web/src/pages/Construction/ConstructionEdit.test.js:2:1)</failure>
+    </testcase>
+  </testsuite>
+</testsuites>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1729542353848" clover="3.2.0">
+  <project timestamp="1729542353848" name="All files">
+    <metrics statements="130" coveredstatements="126" conditionals="50" coveredconditionals="45" methods="28" coveredmethods="28" elements="208" coveredelements="199" complexity="0" loc="130" ncloc="130" packages="3" files="4" classes="4"/>
+    <package name="Construction">
+      <metrics statements="52" coveredstatements="48" conditionals="14" coveredconditionals="9" methods="15" coveredmethods="15"/>
+      <file name="ConstructionCreate.jsx" path="/Users/carlosreinis/Projects/pmv-ads-2024-2-e5-proj-empext-t2-pmv-ads-2024-2-e5-g4-proj-less-reformas/codigo-fonte/web/src/pages/Construction/ConstructionCreate.jsx">
+        <metrics statements="18" coveredstatements="18" conditionals="2" coveredconditionals="2" methods="6" coveredmethods="6"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="10" type="stmt"/>
+        <line num="8" count="10" type="stmt"/>
+        <line num="9" count="10" type="stmt"/>
+        <line num="11" count="10" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="17" count="2" type="stmt"/>
+        <line num="19" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="28" count="10" type="stmt"/>
+        <line num="39" count="2" type="stmt"/>
+        <line num="50" count="2" type="stmt"/>
+        <line num="61" count="2" type="stmt"/>
+        <line num="73" count="1" type="stmt"/>
+      </file>
+      <file name="ConstructionEdit.jsx" path="/Users/carlosreinis/Projects/pmv-ads-2024-2-e5-proj-empext-t2-pmv-ads-2024-2-e5-g4-proj-less-reformas/codigo-fonte/web/src/pages/Construction/ConstructionEdit.jsx">
+        <metrics statements="34" coveredstatements="30" conditionals="12" coveredconditionals="7" methods="9" coveredmethods="9"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="16" type="stmt"/>
+        <line num="7" count="16" type="stmt"/>
+        <line num="8" count="16" type="stmt"/>
+        <line num="10" count="16" type="stmt"/>
+        <line num="11" count="6" type="stmt"/>
+        <line num="12" count="6" type="stmt"/>
+        <line num="17" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="18" count="6" type="stmt"/>
+        <line num="19" count="6" type="stmt"/>
+        <line num="20" count="6" type="stmt"/>
+        <line num="22" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="25" count="6" type="stmt"/>
+        <line num="28" count="16" type="stmt"/>
+        <line num="29" count="2" type="stmt"/>
+        <line num="31" count="2" type="stmt"/>
+        <line num="36" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="38" count="2" type="cond" truecount="3" falsecount="1"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="42" count="2" type="stmt"/>
+        <line num="43" count="2" type="stmt"/>
+        <line num="47" count="16" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="50" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="53" count="1" type="stmt"/>
+        <line num="54" count="1" type="stmt"/>
+        <line num="58" count="16" type="stmt"/>
+        <line num="69" count="2" type="stmt"/>
+        <line num="80" count="2" type="stmt"/>
+        <line num="91" count="1" type="stmt"/>
+        <line num="109" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="EditUser">
+      <metrics statements="40" coveredstatements="40" conditionals="14" coveredconditionals="14" methods="7" coveredmethods="7"/>
+      <file name="index.jsx" path="/Users/carlosreinis/Projects/pmv-ads-2024-2-e5-proj-empext-t2-pmv-ads-2024-2-e5-g4-proj-less-reformas/codigo-fonte/web/src/pages/EditUser/index.jsx">
+        <metrics statements="40" coveredstatements="40" conditionals="14" coveredconditionals="14" methods="7" coveredmethods="7"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="22" type="stmt"/>
+        <line num="7" count="22" type="stmt"/>
+        <line num="8" count="22" type="stmt"/>
+        <line num="9" count="22" type="stmt"/>
+        <line num="10" count="22" type="stmt"/>
+        <line num="12" count="22" type="stmt"/>
+        <line num="13" count="9" type="stmt"/>
+        <line num="16" count="9" type="stmt"/>
+        <line num="17" count="9" type="cond" truecount="2" falsecount="0"/>
+        <line num="18" count="8" type="stmt"/>
+        <line num="22" count="9" type="stmt"/>
+        <line num="25" count="22" type="stmt"/>
+        <line num="26" count="2" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+        <line num="28" count="2" type="stmt"/>
+        <line num="30" count="2" type="stmt"/>
+        <line num="34" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="39" count="2" type="stmt"/>
+        <line num="42" count="22" type="stmt"/>
+        <line num="43" count="5" type="stmt"/>
+        <line num="46" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="50" count="4" type="stmt"/>
+        <line num="52" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="53" count="1" type="stmt"/>
+        <line num="54" count="1" type="stmt"/>
+        <line num="57" count="3" type="stmt"/>
+        <line num="59" count="3" type="stmt"/>
+        <line num="60" count="3" type="stmt"/>
+        <line num="62" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="63" count="1" type="stmt"/>
+        <line num="65" count="1" type="stmt"/>
+        <line num="66" count="1" type="stmt"/>
+        <line num="67" count="1" type="stmt"/>
+        <line num="70" count="2" type="stmt"/>
+        <line num="75" count="22" type="stmt"/>
+        <line num="90" count="2" type="stmt"/>
+        <line num="103" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="Login">
+      <metrics statements="38" coveredstatements="38" conditionals="22" coveredconditionals="22" methods="6" coveredmethods="6"/>
+      <file name="index.jsx" path="/Users/carlosreinis/Projects/pmv-ads-2024-2-e5-proj-empext-t2-pmv-ads-2024-2-e5-g4-proj-less-reformas/codigo-fonte/web/src/pages/Login/index.jsx">
+        <metrics statements="38" coveredstatements="38" conditionals="22" coveredconditionals="22" methods="6" coveredmethods="6"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="45" type="stmt"/>
+        <line num="9" count="45" type="stmt"/>
+        <line num="10" count="45" type="stmt"/>
+        <line num="11" count="45" type="stmt"/>
+        <line num="12" count="45" type="stmt"/>
+        <line num="13" count="45" type="stmt"/>
+        <line num="15" count="45" type="stmt"/>
+        <line num="16" count="4" type="stmt"/>
+        <line num="17" count="4" type="stmt"/>
+        <line num="18" count="4" type="stmt"/>
+        <line num="20" count="4" type="stmt"/>
+        <line num="24" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="25" count="2" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+        <line num="29" count="4" type="stmt"/>
+        <line num="32" count="45" type="stmt"/>
+        <line num="33" count="4" type="stmt"/>
+        <line num="34" count="4" type="stmt"/>
+        <line num="35" count="4" type="stmt"/>
+        <line num="38" count="4" type="stmt"/>
+        <line num="39" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="42" count="1" type="stmt"/>
+        <line num="46" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="49" count="1" type="stmt"/>
+        <line num="52" count="2" type="stmt"/>
+        <line num="56" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="57" count="1" type="stmt"/>
+        <line num="59" count="1" type="stmt"/>
+        <line num="63" count="2" type="stmt"/>
+        <line num="66" count="45" type="stmt"/>
+        <line num="90" count="8" type="stmt"/>
+        <line num="106" count="8" type="stmt"/>
+        <line num="123" count="5" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>
