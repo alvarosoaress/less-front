@@ -181,7 +181,7 @@ export default function ModalImport() {
     }, [reportState.week, openImportModal]);
 
     return (
-        <CustomModal isOpen={openImportModal} maxHeight={'100%'} onRequestClose={handleClose} top={top} >
+        <CustomModal isOpen={openImportModal} maxHeight={'100dvh'} onRequestClose={handleClose} top={top} >
             <div className="w-full no-select">
                 <label>Ano</label>
                 <Select

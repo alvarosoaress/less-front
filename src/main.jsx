@@ -10,6 +10,7 @@ createRoot(document.getElementById("root")).render(
     <Toaster
       position="top-center"
       reverseOrder={false}
+      toastOptions={{duration: 2000}}
     />
     <AppRoutes />
   </BrowserRouter>,

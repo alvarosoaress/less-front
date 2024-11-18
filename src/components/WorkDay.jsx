@@ -4,9 +4,11 @@ import useEmployeeModalStore from "../stores/useEmployeeModalStore";
 
 export default function WorkDay({ workDayData, timeWorkedExists, day, employeeID, constructionID}) {
     const [timeWorked, setTimeWorked] = useState(timeWorkedExists ? Number(workDayData.time_worked) : 0);
+    const [initialY, setInitialY] = useState(0)
+    const [initialX, setInitialX] = useState(0)
     const times = [0, 1, 0.5, 2];
 
-    const { setEmployeeEdit, toggleEditDayModal } = useEmployeeModalStore();
+    const { setEmployeeEdit, toggleEditDayModal, openEditDayModal} = useEmployeeModalStore();
 
     const handleSetTimeWorked = async () => {
         const currentIndex = times.indexOf(timeWorked);
@@ -28,16 +30,21 @@ export default function WorkDay({ workDayData, timeWorkedExists, day, employeeID
     
 
     let timer;
-    let touchDuration = 300;
+    let touchDuration = 650;
 
     function onLongTouch() {
         timer = null;
+        if(window.scrollY != initialY || window.scrollX != initialX) return
+        if(window.screen.width < 600 ) navigator.vibrate(100);
         setEmployeeEdit({workDayData, employeeID, constructionID, day});
         toggleEditDayModal();
     }
 
     function touchstart(e) {
         e.preventDefault();
+        setInitialY(window.scrollY);
+        setInitialX(window.scrollX);
+        
         if (!timer) {
             timer = setTimeout(onLongTouch, touchDuration);
         }

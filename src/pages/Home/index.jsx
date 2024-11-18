@@ -23,8 +23,8 @@ import useImportModalStore from '../../stores/useImportModalStore';
 
 function App() {
     const { toggleEmployeeModal } = useEmployeeModalStore();
-    const { toggleConstructionModal } = useConstructionModalStore();
-    const { toggleImportModal } = useImportModalStore();
+    const { toggleConstructionModal, openConstructionModal } = useConstructionModalStore();
+    const { toggleImportModal, openImportModal } = useImportModalStore();
     const { activeDay, setActiveDay, activeWeek, setActiveWeek, setActiveWeekNum, constructions, setConstructions } = useDateStore();
 
     const [loading, setLoading] = useState(false);
@@ -94,15 +94,20 @@ function App() {
     }, [activeWeek]);
 
     let timer;
-    let touchDuration = 200;
+    let touchDuration = 500;
+    let initialY = 0;
 
     function onLongTouch() {
         timer = null;
+        if(window.scrollY != initialY || openImportModal) return
+        if(window.screen.width < 600 ) navigator.vibrate(100);
         toggleImportModal();
     }
 
     function touchstart(e) {
         e.preventDefault();
+        initialY = window.scrollY;
+
         if (!timer) {
             timer = setTimeout(onLongTouch, touchDuration);
         }
@@ -130,7 +135,7 @@ function App() {
 
             <ModalImport />
 
-            <div className="flex flex-col w-full h-full gap-5 px-3 main">
+            <div className="flex flex-col w-full gap-5 px-3 main">
                 <div className="flex items-center gap-2">
                     <TouchableButton onClick={() => setCalendarOpen((state) => !state)}>
                         <img src={Calendaricon} className="h-7 no-select" />
@@ -141,7 +146,7 @@ function App() {
                     </h3>
                 </div>
                 <motion.div
-                    className='flex flex-col w-full h-full gap-5 overflow-y-scroll'
+                    className='flex flex-col w-full min-h-[100dvh] gap-5'
                     drag="x"
                     dragConstraints={{ left: 0, right: 0 }}
                     onDragEnd={(_, info) => handleDrag(info)}
@@ -180,18 +185,19 @@ function App() {
                     +
                     </button>
                     </div> */}
+
+                    <div className='flex items-center justify-center w-full p-2 bg-white no-select'>
+                        <button
+                            className={`bg-[#3777E6] w-10 h-10 rounded-full text-white no-select ${loading ? 'opacity-0' : 'opacity-100'}`}
+                            onClick={() => openConstructionModal ? null : toggleConstructionModal()}
+                            onTouchStart={touchstart}
+                            onTouchEnd={touchend}
+                            onContextMenu={handleContextMenu}
+                        >
+                            +
+                        </button>
+                    </div>
                 </motion.div>
-                <div className='flex items-center justify-center w-full p-2 bg-white no-select'>
-                    <button
-                        className="bg-[#3777E6] w-10 h-10 rounded-full text-white no-select"
-                        onClick={() => toggleConstructionModal()}
-                        onTouchStart={touchstart}
-                        onTouchEnd={touchend}
-                        onContextMenu={handleContextMenu}
-                    >
-                        +
-                    </button>
-                </div>
             </div>
         </>
     );

@@ -9,7 +9,7 @@ export default function ModalEmployee({ addEmployee }) {
     return (
         <CustomModal
             isOpen={openEmployeeModal}
-            onRequestClose={toggleEmployeeModal}
+            onRequestClose={(toggleEmployeeModal)}
             contentLabel="Escolha um funcionário"
             style={{
                 content: {

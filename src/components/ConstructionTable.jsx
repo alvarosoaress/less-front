@@ -21,10 +21,11 @@ const tableVariants = {
 };
 
 export default function ConstructionTable({ data, activeWeek }) {
-    const { toggleEmployeeModal, setEmployees } = useEmployeeModalStore()
-    activeWeek.map((x) => console.log(moment.utc(x).format('yyyy-MM-DD')))
+    const { toggleEmployeeModal, setEmployees, openEmployeeModal } = useEmployeeModalStore()
 
     const handleAddEmployee = async () => {
+        if(openEmployeeModal) return
+
         toggleEmployeeModal()
 
         const { first, last } = getRange(activeWeek)
@@ -62,10 +63,10 @@ export default function ConstructionTable({ data, activeWeek }) {
             transition={{ duration: 0.25 }}
         >
             <div className="flex items-center justify-between p-2">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center w-full gap-2">
                     <h2 className="font-semibold text-[16px] uppercase">{data.code}</h2>
                     <span className="font-medium italic text-[#BEC3D2] text-[13px] capitalize">{data.name}</span>
-                    {/* <button className="ml-auto" onClick={() => handleDeleteWork(data.id)}>X</button> */}
+                    <button className="ml-auto" onClick={() => handleDeleteWork(data.id)}>X</button>
                 </div>
             </div>
             <table className="w-full border-collapse table-auto">
@@ -119,7 +120,7 @@ export default function ConstructionTable({ data, activeWeek }) {
                         </tr>
                     ))}
                     <tr>
-                        <th colSpan="7" className="w-full h-10 cursor-pointer" onClick={handleAddEmployee}>
+                        <th colSpan="7" className="w-full h-10 border-none outline-none cursor-pointer" onClick={handleAddEmployee}>
                             +
                         </th>
                     </tr>
