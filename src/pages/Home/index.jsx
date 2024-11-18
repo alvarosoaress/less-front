@@ -94,7 +94,7 @@ function App() {
     }, [activeWeek]);
 
     let timer;
-    let touchDuration = 300;
+    let touchDuration = 200;
 
     function onLongTouch() {
         timer = null;
@@ -130,13 +130,13 @@ function App() {
 
             <ModalImport />
 
-            <div className="flex flex-col w-full h-full gap-5 px-3">
+            <div className="flex flex-col w-full h-full gap-5 px-3 main">
                 <div className="flex items-center gap-2">
                     <TouchableButton onClick={() => setCalendarOpen((state) => !state)}>
-                        <img src={Calendaricon} className="h-7" />
+                        <img src={Calendaricon} className="h-7 no-select" />
                     </TouchableButton>
-                    <h2 className="text-lg font-bold text-center">Semana {getWeekNumber(activeDay)}</h2>
-                    <h3 className="text-sm font-medium text-[#908C8C]">
+                    <h2 className="text-lg font-bold text-center no-select">Semana {getWeekNumber(activeDay)}</h2>
+                    <h3 className="text-sm font-medium text-[#908C8C] no-select">
                         {`${getDateInFormat(activeWeek[0], "dd/mm")} a ${getDateInFormat(activeWeek[activeWeek.length - 1], "dd/mm")}`}
                     </h3>
                 </div>
@@ -181,9 +181,9 @@ function App() {
                     </button>
                     </div> */}
                 </motion.div>
-                <div className='flex items-center justify-center w-full p-2 bg-white'>
+                <div className='flex items-center justify-center w-full p-2 bg-white no-select'>
                     <button
-                        className="bg-[#3777E6] w-10 h-10 rounded-full text-white"
+                        className="bg-[#3777E6] w-10 h-10 rounded-full text-white no-select"
                         onClick={() => toggleConstructionModal()}
                         onTouchStart={touchstart}
                         onTouchEnd={touchend}

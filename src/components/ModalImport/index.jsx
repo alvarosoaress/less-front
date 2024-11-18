@@ -181,11 +181,11 @@ export default function ModalImport() {
     }, [reportState.week, openImportModal]);
 
     return (
-        <CustomModal isOpen={openImportModal} onRequestClose={handleClose} top={top} >
-            <div className="w-full">
+        <CustomModal isOpen={openImportModal} maxHeight={'100%'} onRequestClose={handleClose} top={top} >
+            <div className="w-full no-select">
                 <label>Ano</label>
                 <Select
-                    className="selectComponent"
+                    className="selectComponent no-select"
                     styles={customStyles}
                     options={years}
                     value={reportState.year}
@@ -195,10 +195,10 @@ export default function ModalImport() {
                 />
             </div>
 
-            <div className="w-full">
+            <div className="w-full no-select">
                 <label>Semana</label>
                 <Select
-                    className="selectComponent"
+                    className="selectComponent no-select"
                     styles={customStyles}
                     options={weeksOptions}
                     value={reportState.week}
@@ -208,11 +208,11 @@ export default function ModalImport() {
                 />
             </div>
                 
-            <div className='w-full'>
+            <div className='w-full no-select'>
                 <label>Obra:</label>
                 <Select
                     name="construction"
-                    className="selectComponent"
+                    className="selectComponent no-select"
                     options={constructionOptions}
                     styles={customStyles}
                     placeholder="Selecione..."
@@ -225,8 +225,8 @@ export default function ModalImport() {
             </div>
 
             {selectedConstruction ? (
-                <div className="w-full">
-                    <table className="tabelaFunc">
+                <div className="w-full no-select">
+                    <table className="tabelaFunc no-select">
                         <thead>
                             <tr>
                                 <th>Nome</th>
@@ -274,7 +274,7 @@ export default function ModalImport() {
             ) : null}
 
             <button
-                className="w-1/2 py-1 text-center text-white bg-blue-500 rounded-lg disabled:bg-slate-500"
+                className="w-1/2 py-1 text-center text-white bg-blue-500 rounded-lg disabled:bg-slate-500 no-select"
                 disabled={!(selectedConstruction && selectedEmployees?.length)}
                 onClick={handleImportWork}
             >

@@ -3,16 +3,16 @@ import './styles.css';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-export default function CustomModal({ children, isOpen, onRequestClose, customClassName, top, ...props }) {
+export default function CustomModal({ children, isOpen, onRequestClose, customClassName, maxHeight, top, ...props }) {
     const location = useLocation();
 
     useEffect(() => {
         // Adiciona uma nova entrada no histórico quando o modal abre
         if (isOpen) {
             window.history.pushState(null, '', location.pathname);
-            document.body.classList.add('stop-scrolling');
+            document.querySelector('.main').classList.add('stop-scrolling');
         } else {
-            document.body.classList.remove('stop-scrolling');
+            document.querySelector('.main').classList.remove('stop-scrolling');
         }
 
         const handlePopState = () => {
@@ -27,9 +27,6 @@ export default function CustomModal({ children, isOpen, onRequestClose, customCl
         // Remove o listener ao desmontar ou quando o modal fecha
         return () => {
             window.removeEventListener('popstate', handlePopState);
-            if (isOpen) {
-                window.history.back(); // Retorna ao estado anterior se o modal foi fechado
-            }
         };
     }, [isOpen, onRequestClose, location.pathname]);
 
@@ -38,9 +35,10 @@ export default function CustomModal({ children, isOpen, onRequestClose, customCl
             display: "flex",
             flexDirection: "column",
             minHeight: "50%",
-            maxHeight: "65%",
+            maxHeight: maxHeight || "65%",
             width: "100%",
-            padding: '10%'
+            padding: '10%',
+            overflowY: 'auto'
         },
         overlay: {
             alignItems: "end",

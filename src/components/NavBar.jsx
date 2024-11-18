@@ -48,9 +48,9 @@ const NavBar = ({ user }) => {
         <div className={`bg-gray-200 px-8 py-4 transition-all duration-300 ${editMode ? 'min-h-fit' : 'h-24'} flex flex-col items-center justify-start`}>
             {/* Avatar do usuário */}
             {user && (
-                <div className="relative mb-4">
+                <div className="relative mb-4 no-select">
                     <div
-                        className="border border-gray-300 w-16 h-16 rounded-full flex items-center justify-center text-black text-lg cursor-pointer"
+                        className="flex items-center justify-center w-16 h-16 text-lg text-black border border-gray-300 rounded-full cursor-pointer no-select"
                         style={{ backgroundColor: color }}
                         onClick={toggleEditMode} // Ativa o modo de edição ao clicar
                     >
