@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { getWeeks, getDateInFormat } from "../../utils/day";
 import Select from "react-select";
 import Pdf from "../../components/Pdf";
+import moment from "moment";
 
 const generateYears = (startYear) => {
     const currentYear = new Date().getFullYear();
@@ -35,8 +36,8 @@ export default function Report() {
             const weeksArr = getWeeks(new Date(reportState.year.value, 0, 1));
 
             const formattedOptions = weeksArr.map(week => {
-                const startDateFormatted = getDateInFormat(week.dates[0], "dd/mm");
-                const endDateFormatted = getDateInFormat(week.dates[week.dates.length - 1], "dd/mm");
+                const startDateFormatted = moment.utc(week.startDate).format('DD/MM') ;
+                const endDateFormatted = moment.utc(week.endDate).format('DD/MM') ;
 
                 return {
                     label: `Semana ${week.week} - ${startDateFormatted} a ${endDateFormatted}`,

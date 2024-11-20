@@ -67,7 +67,7 @@ const Login = () => {
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-sm p-8 bg-white rounded-lg shadow-md">
         <div className="flex justify-center mb-6">
-          <img src={logo} alt="Company Logo" className="h-32" />
+          <img src='https://i.imgur.com/cMtoNn5.png' alt="Company Logo"  />
         </div>
         <div>
           <h3 className="mb-6 text-2xl font-bold text-center">

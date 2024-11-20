@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from "react";
 import { getWeekDays, getRange, getWeekNumber, formatDateRange, getDateInFormat } from "../../utils/day";
-import { getWorksByRange, getWorksDate, postWorks } from "../../service/apiService";
+import { deleteFullConstruction, getWorksByRange, getWorksDate, postWorks } from "../../service/apiService";
 
 import ConstructionTable from "../../components/ConstructionTable";
 import ArrowIcon from "../../assets/icons/arrow.svg"
@@ -20,16 +20,22 @@ import Calendaricon from "../../assets/icons/calendar.svg"
 import 'react-calendar/dist/Calendar.css';
 import ModalImport from '../../components/ModalImport';
 import useImportModalStore from '../../stores/useImportModalStore';
+import useDeleteModalStore from '../../stores/useDeleteModalStore';
+import { useLocation } from 'react-router-dom';
+import moment from 'moment';
+import toast from 'react-hot-toast';
 
 function App() {
     const { toggleEmployeeModal } = useEmployeeModalStore();
     const { toggleConstructionModal, openConstructionModal } = useConstructionModalStore();
     const { toggleImportModal, openImportModal } = useImportModalStore();
-    const { activeDay, setActiveDay, activeWeek, setActiveWeek, setActiveWeekNum, constructions, setConstructions } = useDateStore();
+    const { activeDay, setActiveDay, activeWeek, setActiveWeek, setActiveWeekNum, constructions, setConstructions, refreshConstructions } = useDateStore();
+    const { openDeleteModal, toggleDeleteModal, deleteConstructionId } = useDeleteModalStore();
 
     const [loading, setLoading] = useState(false);
     const [works, setWorks] = useState([]);
     const [calendarOpen, setCalendarOpen] = useState(false);
+    const [initialY, setInitialY] = useState(0)
 
     const toggleWeek = (interval) => {
         const newDate = new Date(activeDay);
@@ -95,7 +101,6 @@ function App() {
 
     let timer;
     let touchDuration = 500;
-    let initialY = 0;
 
     function onLongTouch() {
         timer = null;
@@ -106,7 +111,7 @@ function App() {
 
     function touchstart(e) {
         e.preventDefault();
-        initialY = window.scrollY;
+        setInitialY(window.scrollY);
 
         if (!timer) {
             timer = setTimeout(onLongTouch, touchDuration);
@@ -124,6 +129,47 @@ function App() {
     function handleContextMenu(e) {
         e.preventDefault();
     }
+
+    async function handleDeleteConstruction() {
+        try {
+            const startDate = moment.utc(activeWeek[0]).format('yyyy-MM-DD');
+            const endDate = moment.utc(activeWeek[activeWeek.length -1 ]).format('yyyy-MM-DD');
+            const res = await deleteFullConstruction(deleteConstructionId, startDate, endDate)
+            toggleDeleteModal();
+            refreshConstructions(activeWeek);
+            
+            toast.success('Obra deletada.')
+            return res;
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const location = useLocation();
+
+    useEffect(() => {
+        // Adiciona uma nova entrada no histórico quando o modal abre
+        if (openDeleteModal) {
+            window.history.pushState(null, '', location.pathname);
+            document.body.classList.toggle('stop-scrolling');
+        } else {
+            document.body.classList.toggle('stop-scrolling');
+        }
+
+        const handlePopState = () => {
+            if (openDeleteModal) {
+                toggleDeleteModal();
+            }
+        };
+
+        // Escuta o evento "popstate" para capturar o botão de "voltar"
+        window.addEventListener('popstate', handlePopState);
+
+        // Remove o listener ao desmontar ou quando o modal fecha
+        return () => {
+            window.removeEventListener('popstate', handlePopState);
+        };
+    }, [openDeleteModal, toggleDeleteModal, location.pathname]);
 
     return (
         <>
@@ -147,7 +193,7 @@ function App() {
                 </div>
                 <motion.div
                     className='flex flex-col w-full min-h-[100dvh] gap-5'
-                    drag="x"
+                    drag={openDeleteModal ? false : "x"}
                     dragConstraints={{ left: 0, right: 0 }}
                     onDragEnd={(_, info) => handleDrag(info)}
                 >
@@ -197,6 +243,30 @@ function App() {
                             +
                         </button>
                     </div>
+
+                    {openDeleteModal && (
+                        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+                            <div className="max-w-sm p-8 bg-white rounded-lg shadow-lg">
+                                <p className="mb-4 text-center text-gray-700">
+                                    Tem certeza que deseja deletar esta obra?
+                                </p>
+                                <div className="flex justify-center space-x-4">
+                                    <button
+                                        onClick={handleDeleteConstruction}
+                                        className="px-4 py-2 text-white transition bg-red-500 rounded hover:bg-red-600"
+                                    >
+                                        Deletar
+                                    </button>
+                                    <button
+                                        onClick={() => toggleDeleteModal()}
+                                        className="px-4 py-2 text-white transition bg-gray-500 rounded hover:bg-gray-600"
+                                    >
+                                        Cancelar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </motion.div>
             </div>
         </>

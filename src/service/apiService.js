@@ -148,7 +148,6 @@ export const deleteConstruction = async (id) => {
 
 export const deleteFullConstruction = async (id_construction, startDate, endDate) => {
     try {
-        console.log({ id_construction, startDate, endDate })
         const response = await axios.delete(`${import.meta.env.VITE_API_URL}/fullConstruction`, { data: { id_construction, startDate, endDate } });
         return response.data;
     } catch (err) {

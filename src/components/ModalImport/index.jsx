@@ -136,8 +136,8 @@ export default function ModalImport() {
             const weeksArr = getWeeks(new Date(reportState.year.value, 0, 1).getFullYear());
 
             const formattedOptions = weeksArr.map(week => {
-                const startDateFormatted = getDateInFormat(week.startDate, "dd/mm");
-                const endDateFormatted = getDateInFormat(week.endDate, "dd/mm");
+                const startDateFormatted = moment.utc(week.startDate).format('DD/MM') ;
+                const endDateFormatted = moment.utc(week.endDate).format('DD/MM') ;
 
                 return {
                     label: `Semana ${week.week} - ${startDateFormatted} a ${endDateFormatted}`,

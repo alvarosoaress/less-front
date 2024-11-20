@@ -5,8 +5,12 @@ import useEmployeeModalStore from "../stores/useEmployeeModalStore";
 import { deleteFullConstruction, getUnallocatedEmployeesByConstruction } from "../service/apiService";
 import { shortName } from "../utils/employee";
 
+import TrashIcon from "../assets/icons/trash.svg"
+
 import { motion } from "framer-motion";
 import moment from "moment";
+import useDeleteModalStore from "../stores/useDeleteModalStore";
+import { useState } from "react";
 
 const tableVariants = {
     initial: {
@@ -22,6 +26,8 @@ const tableVariants = {
 
 export default function ConstructionTable({ data, activeWeek }) {
     const { toggleEmployeeModal, setEmployees, openEmployeeModal } = useEmployeeModalStore()
+    const { toggleDeleteModal, openDeleteModal, setDeleteID } = useDeleteModalStore()
+    const [initialY, setInitialY] = useState(0)
 
     const handleAddEmployee = async () => {
         if(openEmployeeModal) return
@@ -41,16 +47,36 @@ export default function ConstructionTable({ data, activeWeek }) {
         setEmployees(result);
     }
 
-    async function handleDeleteWork(idConstruction) {
-        try {
-            const startDate = moment.utc(activeWeek[0]).format('yyyy-MM-DD');
-            const endDate = moment.utc(activeWeek[activeWeek.length -1 ]).format('yyyy-MM-DD');
-            const res = await deleteFullConstruction(idConstruction, startDate, endDate)
+    let timer;
+    let touchDuration = 650;
 
-            return res;
-        } catch (error) {
-            console.log(error)
+    function onLongTouch() {
+        timer = null;
+        if(window.scrollY != initialY || openDeleteModal) return
+        if(window.screen.width < 600 ) navigator.vibrate(100);
+        setDeleteID(data.id);
+        toggleDeleteModal();
+    }
+
+    function touchstart(e) {
+        e.preventDefault();
+        setInitialY(window.scrollY);
+
+        if (!timer) {
+            timer = setTimeout(onLongTouch, touchDuration);
         }
+    }
+
+    function touchend() {
+        if (timer) {
+            clearTimeout(timer);
+            timer = null;
+        }
+    }
+
+    // previne o menu de contexto padrão ao segurar o toque
+    function handleContextMenu(e) {
+        e.preventDefault();
     }
 
     return (
@@ -64,9 +90,15 @@ export default function ConstructionTable({ data, activeWeek }) {
         >
             <div className="flex items-center justify-between p-2">
                 <div className="flex items-center w-full gap-2">
-                    <h2 className="font-semibold text-[16px] uppercase">{data.code}</h2>
+                    <button
+                        onTouchStart={touchstart}
+                        onTouchEnd={touchend}
+                        onContextMenu={handleContextMenu}
+                    >
+                        <h2 className="font-semibold text-[16px] uppercase">{data.code}</h2>
+                    </button>
                     <span className="font-medium italic text-[#BEC3D2] text-[13px] capitalize">{data.name}</span>
-                    {/* <button className="ml-auto" onClick={() => handleDeleteWork(data.id)}>X</button> */}
+                    {/* <img width={15} src={TrashIcon} className="ml-auto cursor-pointer" onClick={() => handleDeleteWork(data.id)}/> */}
                 </div>
             </div>
             <table className="w-full border-collapse table-auto">

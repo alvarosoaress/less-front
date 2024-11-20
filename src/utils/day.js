@@ -87,7 +87,7 @@ export function getWeeks(yearInput) {
         const end = new Date(currentMonday);
 
         // Define o final da semana (sábado)
-        end.setDate(end.getDate() + 5);
+        end.setDate(end.getDate() + 6);
 
         // Monta o array de datas da semana
         const dates = [];

@@ -24,10 +24,10 @@ export default function Pdf({ startDate, endDate }) {
     const [isLoaded, setIsLoaded] = useState(false)
     const [isDownloading, setIsDownloading] = useState(false)
 
-    const file = `${import.meta.env.VITE_REPORT_URL}startDate=${startDate}&endDate=${endDate}`
+    const file = `${import.meta.env.VITE_API_URL}/weeklyReport?startDate=${startDate}&endDate=${endDate}`
 
     if(import.meta.env.VITE_PRODUCTION) {
-        `${import.meta.env.VITE_REPORT_URL}startDate=${startDate}&endDate=${endDate}`
+        file = `${import.meta.env.VITE_REPORT_URL}startDate=${startDate}&endDate=${endDate}`
     }
 
     function onDocumentLoadSuccess({ numPages }) {

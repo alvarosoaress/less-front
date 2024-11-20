@@ -5,22 +5,27 @@ import useEmployeeModalStore from "../stores/useEmployeeModalStore";
 export default function WorkDay({ workDayData, timeWorkedExists, day, employeeID, constructionID}) {
     const [timeWorked, setTimeWorked] = useState(timeWorkedExists ? Number(workDayData.time_worked) : 0);
     const [initialY, setInitialY] = useState(0)
-    const [initialX, setInitialX] = useState(0)
+    const [loading, setLoading] = useState(false)
     const times = [0, 1, 0.5, 2];
 
     const { setEmployeeEdit, toggleEditDayModal, openEditDayModal} = useEmployeeModalStore();
 
     const handleSetTimeWorked = async () => {
+        if(loading) return
+
         const currentIndex = times.indexOf(timeWorked);
         const nextIndex = (currentIndex + 1) % times.length;
         const newTimeWorked = times[nextIndex];
         setTimeWorked(newTimeWorked);
 
         try {
+            setLoading(true)
             await putWork(workDayData.id_work, newTimeWorked);
             workDayData.time_worked = newTimeWorked;
+            setLoading(false)
         } catch (err) {
             console.log("houve um erro ao salvar os dados ", err);
+            setLoading(false)
         }
     };
 
@@ -34,7 +39,7 @@ export default function WorkDay({ workDayData, timeWorkedExists, day, employeeID
 
     function onLongTouch() {
         timer = null;
-        if(window.scrollY != initialY || window.scrollX != initialX) return
+        if(window.scrollY != initialY || openEditDayModal) return
         if(window.screen.width < 600 ) navigator.vibrate(100);
         setEmployeeEdit({workDayData, employeeID, constructionID, day});
         toggleEditDayModal();
@@ -43,7 +48,6 @@ export default function WorkDay({ workDayData, timeWorkedExists, day, employeeID
     function touchstart(e) {
         e.preventDefault();
         setInitialY(window.scrollY);
-        setInitialX(window.scrollX);
         
         if (!timer) {
             timer = setTimeout(onLongTouch, touchDuration);
@@ -64,7 +68,7 @@ export default function WorkDay({ workDayData, timeWorkedExists, day, employeeID
 
     return (
         <td
-            className="px-2 py-1 text-center cursor-pointer"
+            className={`${loading ? 'opacity-20' : ''} px-2 py-1 text-center cursor-pointer`}
             onClick={handleSetTimeWorked}
             onTouchStart={touchstart}
             onTouchEnd={touchend}
