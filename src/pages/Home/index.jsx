@@ -132,8 +132,8 @@ function App() {
 
     async function handleDeleteConstruction() {
         try {
-            const startDate = moment.utc(activeWeek[0]).format('yyyy-MM-DD');
-            const endDate = moment.utc(activeWeek[activeWeek.length -1 ]).format('yyyy-MM-DD');
+            const startDate = moment(activeWeek[0]).format('yyyy-MM-DD');
+            const endDate = moment(activeWeek[activeWeek.length -1 ]).format('yyyy-MM-DD');
             const res = await deleteFullConstruction(deleteConstructionId, startDate, endDate)
             toggleDeleteModal();
             refreshConstructions(activeWeek);

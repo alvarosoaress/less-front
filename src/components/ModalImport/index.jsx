@@ -122,7 +122,7 @@ export default function ModalImport() {
         try {
             const res = await postWorks(bodyPost);
 
-            toggleImportModal();
+            handleClose();
             refreshConstructions(activeWeek)
         } catch (error) {
             console.log(error)
