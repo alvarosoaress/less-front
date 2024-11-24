@@ -1,9 +1,30 @@
 import axios from "axios";
 import moment from "moment";
 
+const token = import.meta.env.VITE_API_KEY;
+
+const apiClient = axios.create({
+    baseURL: `${import.meta.env.VITE_API_URL}`,
+    headers: {
+        "Content-Type": "application/json",
+    },
+});
+
+apiClient.interceptors.request.use(
+    (config) => {
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+);
+
 export const getFreeConstructionsByRange = async (startDate, endDate) => {
     try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/unallocatedConstruction`, {
+        const response = await apiClient.get(`/unallocatedConstruction`, {
             params: {
                 startDate: startDate,
                 endDate: endDate
@@ -18,7 +39,7 @@ export const getFreeConstructionsByRange = async (startDate, endDate) => {
 
 export const getWorksByRange = async (startDate, endDate) => {
     try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/worksByRange`, {
+        const response = await apiClient.get(`/worksByRange`, {
             params: {
                 startDate: startDate,
                 endDate: endDate
@@ -33,7 +54,7 @@ export const getWorksByRange = async (startDate, endDate) => {
 
 export const getWorksDate = async () => {
     try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/worksDate`);
+        const response = await apiClient.get(`/worksDate`);
         return response.data;
     } catch (err) {
         console.log(err);
@@ -43,7 +64,7 @@ export const getWorksDate = async () => {
 
 export const postWorks = async (workData) => {
     try {
-        const response = await axios.post(`${import.meta.env.VITE_API_URL}/works`, workData);
+        const response = await apiClient.post(`/works`, workData);
         return response.data;
     } catch (err) {
         console.log(err.message);
@@ -53,7 +74,7 @@ export const postWorks = async (workData) => {
 
 export const getUnallocatedEmployeesByConstruction = async (data) => {
     try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/unallocatedEmployeesByConstruction`, {
+        const response = await apiClient.get(`/unallocatedEmployeesByConstruction`, {
             params: data
         });
         return response.data;
@@ -65,7 +86,7 @@ export const getUnallocatedEmployeesByConstruction = async (data) => {
 
 export const getUnallocatedEmployees = async (data) => {
     try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/unallocatedEmployees`, {
+        const response = await apiClient.get(`/unallocatedEmployees`, {
             params: data
         });
         return response.data;
@@ -77,7 +98,7 @@ export const getUnallocatedEmployees = async (data) => {
 
 export const putWork = async (id_work, time_worked) => {
     try {
-        const response = await axios.put(`${import.meta.env.VITE_API_URL}/work`, {
+        const response = await apiClient.put(`/work`, {
             id: id_work,
             time_worked: time_worked
         });
@@ -90,7 +111,7 @@ export const putWork = async (id_work, time_worked) => {
 
 export const putWorkFull = async (id_work, daily_value, time_worked) => {
     try {
-        const response = await axios.put(`${import.meta.env.VITE_API_URL}/workFull`, {
+        const response = await apiClient.put(`/workFull`, {
             id_work,
             time_worked,
             daily_value
@@ -106,18 +127,18 @@ export const putWorkFull = async (id_work, daily_value, time_worked) => {
 //GET
 export const getConstruction = async () => {
     try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/construction`,);
+        const response = await apiClient.get(`/construction`,);
         return response.data;
     } catch (err) {
         console.log(err.message);
         return null;
     }
 };
-      
+
 //POST (Criação de nova construção)
 export const createConstruction = async (constructionData) => {
     try {
-        const response = await axios.post(`${import.meta.env.VITE_API_URL}/construction`, constructionData);
+        const response = await apiClient.post(`/construction`, constructionData);
         return response.data;
     } catch (err) {
         console.error("Erro ao criar construção:", err.message);
@@ -128,7 +149,7 @@ export const createConstruction = async (constructionData) => {
 //UPDATE (Atualizar construção existente)
 export const updateConstruction = async (id, constructionData) => {
     try {
-        const response = await axios.put(`${import.meta.env.VITE_API_URL}/construction/${id}`, constructionData);
+        const response = await apiClient.put(`/construction/${id}`, constructionData);
         return response.data;
     } catch (err) {
         console.error("Erro ao atualizar construção:", err.message);
@@ -139,7 +160,7 @@ export const updateConstruction = async (id, constructionData) => {
 //DELETE (Deletar construção existente)
 export const deleteConstruction = async (id) => {
     try {
-        const response = await axios.delete(`${import.meta.env.VITE_API_URL}/construction/${id}`);
+        const response = await apiClient.delete(`/construction/${id}`);
         return response.data;
     } catch (err) {
         console.error("Erro ao deletar construção:", err.message);
@@ -149,7 +170,7 @@ export const deleteConstruction = async (id) => {
 
 export const getConstructionSummary = async (startDate, endDate) => {
     try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/constructionSummaryByRange`, {
+        const response = await apiClient.get(`/constructionSummaryByRange`, {
             params: {
                 startDate: startDate,
                 endDate: endDate
@@ -164,7 +185,7 @@ export const getConstructionSummary = async (startDate, endDate) => {
 
 export const deleteFullConstruction = async (id_construction, startDate, endDate) => {
     try {
-        const response = await axios.delete(`${import.meta.env.VITE_API_URL}/fullConstruction`, { data: { id_construction, startDate, endDate } });
+        const response = await apiClient.delete(`/fullConstruction`, { data: { id_construction, startDate, endDate } });
         return response.data;
     } catch (err) {
         console.error("Erro ao deletar construção:", err.message);
@@ -174,7 +195,7 @@ export const deleteFullConstruction = async (id_construction, startDate, endDate
 
 export const getEmployees = async () => {
     try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/employees`,);
+        const response = await apiClient.get(`/employees`,);
         return response.data;
     } catch (err) {
         console.log(err.message);
@@ -184,7 +205,7 @@ export const getEmployees = async () => {
 
 export const getEmployee = async (employeeID) => {
     try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/employee`, { params: employeeID });
+        const response = await apiClient.get(`/employee`, { params: employeeID });
         return response.data;
     } catch (err) {
         console.log(err.message);
@@ -194,7 +215,7 @@ export const getEmployee = async (employeeID) => {
 
 export const putEmpWork = async (new_id_employee, old_id_employee, date, id_construction) => {
     try {
-        const response = await axios.put(`${import.meta.env.VITE_API_URL}/changeWorkEmp`, {
+        const response = await apiClient.put(`/changeWorkEmp`, {
             new_id_employee, old_id_employee, date, id_construction
         });
         return response.data;
@@ -206,7 +227,7 @@ export const putEmpWork = async (new_id_employee, old_id_employee, date, id_cons
 
 export const deleteEmpWork = async (id_employee, date, id_construction) => {
     try {
-        const response = await axios.delete(`${import.meta.env.VITE_API_URL}/workEmp`, {
+        const response = await apiClient.delete(`/workEmp`, {
             data: { id_employee, date, id_construction }
         });
         return response.data;
@@ -221,7 +242,7 @@ export const getEmployeeSummary = async (startDate, endDate) => {
     endDate = moment(endDate).format('yyyy-MM-DD');
 
     try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/worksSummaryByRange`, {
+        const response = await apiClient.get(`/worksSummaryByRange`, {
             params: {
                 startDate: startDate,
                 endDate: endDate
@@ -234,9 +255,9 @@ export const getEmployeeSummary = async (startDate, endDate) => {
     }
 };
 
-export const getWeeklyReport = async(startDate, endDate) => {
+export const getWeeklyReport = async (startDate, endDate) => {
     try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/weeklyReport`, { params: { startDate, endDate } });
+        const response = await apiClient.get(`/weeklyReport`, { params: { startDate, endDate } });
         return response.data;
     } catch (err) {
         console.log(err.message);

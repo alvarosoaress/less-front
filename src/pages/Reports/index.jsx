@@ -3,6 +3,7 @@ import { getWeeks, getDateInFormat } from "../../utils/day";
 import Select from "react-select";
 import Pdf from "../../components/Pdf";
 import moment from "moment";
+import useDateStore from "../../stores/useDateStore";
 
 const generateYears = (startYear) => {
     const currentYear = new Date().getFullYear();
@@ -21,7 +22,9 @@ const selectTypes = [
 ];
 
 export default function Report() {
-    const years = generateYears(2010);
+    const { activeDay } = useDateStore();
+
+    const years = generateYears(2020, activeDay);
 
     const [reportState, setReportState] = useState({
         reportType: selectTypes[0],
@@ -33,7 +36,7 @@ export default function Report() {
 
     useEffect(() => {
         const fetchWeeks = () => {
-            const weeksArr = getWeeks(new Date(reportState.year.value, 0, 1));
+            const weeksArr = getWeeks(new Date(reportState.year.value, 0, 1).getFullYear());
 
             const formattedOptions = weeksArr.map(week => {
                 const startDateFormatted = moment.utc(week.startDate).format('DD/MM') ;
