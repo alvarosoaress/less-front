@@ -1,4 +1,5 @@
 import axios from "axios";
+import moment from "moment";
 
 export const getFreeConstructionsByRange = async (startDate, endDate) => {
     try {
@@ -146,6 +147,21 @@ export const deleteConstruction = async (id) => {
     }
 };
 
+export const getConstructionSummary = async (startDate, endDate) => {
+    try {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/constructionSummaryByRange`, {
+            params: {
+                startDate: startDate,
+                endDate: endDate
+            }
+        });
+        return response.data;
+    } catch (err) {
+        console.log(err);
+        return null;
+    }
+};
+
 export const deleteFullConstruction = async (id_construction, startDate, endDate) => {
     try {
         const response = await axios.delete(`${import.meta.env.VITE_API_URL}/fullConstruction`, { data: { id_construction, startDate, endDate } });
@@ -196,6 +212,24 @@ export const deleteEmpWork = async (id_employee, date, id_construction) => {
         return response.data;
     } catch (err) {
         console.log(err.message);
+        return null;
+    }
+};
+
+export const getEmployeeSummary = async (startDate, endDate) => {
+    startDate = moment(startDate).format('yyyy-MM-DD');
+    endDate = moment(endDate).format('yyyy-MM-DD');
+
+    try {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/worksSummaryByRange`, {
+            params: {
+                startDate: startDate,
+                endDate: endDate
+            }
+        });
+        return response.data;
+    } catch (err) {
+        console.log(err);
         return null;
     }
 };

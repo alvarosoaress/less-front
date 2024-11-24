@@ -134,7 +134,7 @@ export default function ConstructionTable({ data, activeWeek }) {
                             </td>
                             {activeWeek.map(day => {
                                 if ((new Date(day).getDay() !== 0)) {
-                                    const formattedDay = moment.utc(day).format('yyyy-MM-DD');
+                                    const formattedDay = moment(day).format('yyyy-MM-DD');
                                     const workDay = employee.work_days.find(wd => moment.utc(wd.date).format('yyyy-MM-DD') === formattedDay);
 
                                     return (

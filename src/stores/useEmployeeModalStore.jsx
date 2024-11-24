@@ -6,6 +6,7 @@ const useEmployeeModalStore = create((set) => ({
     employees: [],
     employeeEdit: {},
     toggleEmployeeModal: () => set((state) => ({ openEmployeeModal: !state.openEmployeeModal })),
+    closeEmployeeModal: () => set(() => ({ openEmployeeModal: false })),
     toggleEditDayModal: () => set((state) => ({ openEditDayModal: !state.openEditDayModal })),
     setEmployees: (data) => set(() => ({ employees: data })),
     setEmployeeEdit: (data) => set(() => ({ employeeEdit: data })),

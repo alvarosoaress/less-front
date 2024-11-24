@@ -9,7 +9,7 @@ import CustomModal from '../Modal';
 import SelectEmployee from '../SelectEmployee';
 
 export default function ModalConstruction() {
-    const { openConstructionModal, toggleConstructionModal } = useConstructionModalStore();
+    const { openConstructionModal, closeConstructionModal } = useConstructionModalStore();
     const { activeDay, activeWeek, refreshConstructions } = useDateStore();
     const top = window.scrollY
 
@@ -77,7 +77,7 @@ export default function ModalConstruction() {
         try {
             const res = await postWorks(bodyPost);
 
-            toggleConstructionModal()
+            closeConstructionModal()
             refreshConstructions(activeWeek)
         } catch (error) {
             console.log(error)
@@ -108,13 +108,7 @@ export default function ModalConstruction() {
     }, [openConstructionModal])
 
     return (
-        <CustomModal isOpen={openConstructionModal} onRequestClose={toggleConstructionModal} top={top} >
-            {/* <button
-                className='absolute flex items-center justify-center h-6 p-1 text-center text-white bg-blue-500 rounded-xl top-2 right-2 w-fit'
-                onClick={toggleConstructionModal}>
-                X
-            </button> */}
-
+        <CustomModal isOpen={openConstructionModal} onRequestClose={closeConstructionModal} top={top} >
             <div className='w-full'>
                 <label>Obra:</label>
                 <Select

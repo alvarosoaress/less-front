@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { putWork } from "../service/apiService";
 import useEmployeeModalStore from "../stores/useEmployeeModalStore";
+import useDateStore from "../stores/useDateStore";
 
 export default function WorkDay({ workDayData, timeWorkedExists, day, employeeID, constructionID}) {
     const [timeWorked, setTimeWorked] = useState(timeWorkedExists ? Number(workDayData.time_worked) : 0);
@@ -9,6 +10,7 @@ export default function WorkDay({ workDayData, timeWorkedExists, day, employeeID
     const times = [0, 1, 0.5, 2];
 
     const { setEmployeeEdit, toggleEditDayModal, openEditDayModal} = useEmployeeModalStore();
+    const { activeWeek, refreshConstructions } = useDateStore();
 
     const handleSetTimeWorked = async () => {
         if(loading) return
@@ -19,10 +21,11 @@ export default function WorkDay({ workDayData, timeWorkedExists, day, employeeID
         setTimeWorked(newTimeWorked);
 
         try {
-            setLoading(true)
+            setLoading(true);
             await putWork(workDayData.id_work, newTimeWorked);
             workDayData.time_worked = newTimeWorked;
-            setLoading(false)
+            setLoading(false);
+            refreshConstructions(activeWeek);
         } catch (err) {
             console.log("houve um erro ao salvar os dados ", err);
             setLoading(false)

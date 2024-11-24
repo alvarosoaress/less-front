@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from "react";
 import { getWeekDays, getRange, getWeekNumber, formatDateRange, getDateInFormat } from "../../utils/day";
-import { deleteFullConstruction, getWorksByRange, getWorksDate, postWorks } from "../../service/apiService";
+import { deleteFullConstruction, getConstructionSummary, getEmployeeSummary, getWorksByRange, getWorksDate, postWorks } from "../../service/apiService";
 
 import ConstructionTable from "../../components/ConstructionTable";
 import ArrowIcon from "../../assets/icons/arrow.svg"
@@ -24,10 +24,11 @@ import useDeleteModalStore from '../../stores/useDeleteModalStore';
 import { useLocation } from 'react-router-dom';
 import moment from 'moment';
 import toast from 'react-hot-toast';
+import Summary from '../../components/Summary';
 
 function App() {
     const { toggleEmployeeModal } = useEmployeeModalStore();
-    const { toggleConstructionModal, openConstructionModal } = useConstructionModalStore();
+    const { closeConstructionModal, openConstructionModal, toggleConstructionModal } = useConstructionModalStore();
     const { toggleImportModal, openImportModal } = useImportModalStore();
     const { activeDay, setActiveDay, activeWeek, setActiveWeek, setActiveWeekNum, constructions, setConstructions, refreshConstructions } = useDateStore();
     const { openDeleteModal, toggleDeleteModal, deleteConstructionId } = useDeleteModalStore();
@@ -35,7 +36,7 @@ function App() {
     const [loading, setLoading] = useState(false);
     const [works, setWorks] = useState([]);
     const [calendarOpen, setCalendarOpen] = useState(false);
-    const [initialY, setInitialY] = useState(0)
+    const [initialY, setInitialY] = useState(0);
 
     const toggleWeek = (interval) => {
         const newDate = new Date(activeDay);
@@ -54,10 +55,8 @@ function App() {
 
         await postWorks(array)
 
-        const newDate = new Date(activeDay)
-        setActiveDay(newDate)
-
-        toggleEmployeeModal()
+        toggleEmployeeModal();
+        refreshConstructions(activeWeek);
     }
 
     function handleDrag(info) {
@@ -80,8 +79,7 @@ function App() {
             setLoading(true);
             const { first, last } = getRange(activeWeek);
             const result = await getWorksByRange(first, last);
-            result.sort((a, b) => a.name < b.name)
-            setConstructions(null);
+            result.sort((a, b) => a.code > b.code)
             setConstructions(result);
             setLoading(false);
         };
@@ -223,14 +221,12 @@ function App() {
                         )) :
                         <div>Nenhuma Obra para esta semana</div>
                     )}
-                    {/* <div className='fixed bottom-0 w-full py-2 m-auto bg-white'>
-                    <button 
-                    className="justify-center w-[95%] py-1 font-bold text-center text-white bg-blue-500 rounded-lg align-center" 
-                    onClick={() => toggleConstructionModal()}
-                    >
-                    +
-                    </button>
-                    </div> */}
+                    
+                    {constructions.length ? (
+                        <Summary data={constructions} />
+                    ) : (
+                       null
+                    )}
 
                     <div className='flex items-center justify-center w-full p-2 bg-white no-select'>
                         <button

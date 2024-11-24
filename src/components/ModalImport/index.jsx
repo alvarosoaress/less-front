@@ -10,8 +10,8 @@ import useImportModalStore from '../../stores/useImportModalStore';
 import { shortName } from '../../utils/employee';
 import moment from 'moment/moment';
 
-const generateYears = (startYear) => {
-    const currentYear = new Date().getFullYear();
+const generateYears = (startYear, activeDay) => {
+    const currentYear = activeDay.getFullYear();
     let years = [];
 
     for (let year = currentYear; year >= startYear; year--) {
@@ -33,7 +33,7 @@ export default function ModalImport() {
     const [weeksOptions, setWeeksOptions] = useState([]);
     const [constructionOptions, setConstructionOptions] = useState([]);
     
-    const years = generateYears(2020);
+    const years = generateYears(2020, activeDay);
 
     const [reportState, setReportState] = useState({
         construction: null,
@@ -96,16 +96,13 @@ export default function ModalImport() {
         let bodyPost = [];
 
         selectedEmployees.map((emp) => {
-            emp.work_days.map((work) => {
-                // adicionando 13 horas para não conflitar com fusos
-                // sempre vem 0 de fuso, porém, com o fuso atual do pc
-                // pode ficar para tras a data, ao adicionar 13 é normalizado para qualquer fuso
-                let correspondingWeek = getWeekNumber(moment.utc(work.date).add(13, 'hours').toDate())
-                let actualWeek = getWeekNumber(activeDay)
-
-                let diff = (actualWeek - correspondingWeek) * 7
-
-                let newDate = moment.utc(work.date).add(diff, 'd').format('yyyy-MM-DD') 
+            emp.work_days.map((work, index) => {
+                let newDate = moment().set({
+                    'year': activeWeek[index].getFullYear(),
+                    'month': activeWeek[index].getMonth(), 
+                    'date': activeWeek[index].getDate()
+                })
+                .format('yyyy-MM-DD') 
 
                 let data = {
                     id_employee: emp.id_employee,

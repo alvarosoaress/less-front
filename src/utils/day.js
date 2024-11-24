@@ -1,3 +1,4 @@
+import moment from "moment";
 
 export function getWeekDays(date) {
     const weekdays = [];
@@ -71,47 +72,43 @@ export function getWeeks(yearInput) {
     const year = (typeof yearInput === 'string' || typeof yearInput === 'number') ? parseInt(yearInput) : yearInput.getFullYear();
 
     const weeks = [];
-    const startDate = new Date(year, 0, 1); // 1º de janeiro
-    const endDate = new Date(year, 11, 31); // 31 de dezembro
+    let startDate = new Date(year, 0, 1); // 1º de janeiro
 
-    // Ajusta o dia da semana para a primeira segunda-feira do ano
-    const firstMonday = new Date(startDate);
-    while (firstMonday.getDay() !== 1) {
-        firstMonday.setDate(firstMonday.getDate() + 1);
+    if (startDate.getUTCDay != 0) {
+        startDate = moment(startDate).day("Monday").toDate()
     }
 
-    let currentMonday = firstMonday;
+    do {
+        const start = new Date(startDate);
+        const end = new Date(startDate);
 
-    while (currentMonday <= endDate) {
-        const start = new Date(currentMonday);
-        const end = new Date(currentMonday);
-
-        // Define o final da semana (sábado)
+        // define o final da semana (sábado)
         end.setDate(end.getDate() + 6);
 
-        // Monta o array de datas da semana
         const dates = [];
         for (let i = 0; i < 6; i++) {
             const date = new Date(start);
             date.setDate(start.getDate() + i);
-            // Formata a data no formato "aaaa-mm-dd"
             const formattedDate = date.toISOString().split('T')[0];
             dates.push(formattedDate);
         }
 
-        // Monta o objeto da semana
-        weeks.push({
-            week: weeks.length + 1,
-            year: year.toString(),
-            dates: dates,
-            startDate: start,
-            endDate: end,
-            weekNum: getWeekNumber(start)
-        });
+        const startWeekNormalized = new Date(Date.UTC(start.getFullYear(), start.getMonth(), start.getDate()));
+        startWeekNormalized.setUTCDate(start.getUTCDate() + 4 - (start.getUTCDay() || 7));
 
-        // Avança para a próxima semana
-        currentMonday.setDate(currentMonday.getDate() + 7);
-    }
+        if (startWeekNormalized.getUTCFullYear().toString() == year) {
+            weeks.push({
+                week: weeks.length + 1,
+                year: startWeekNormalized.getUTCFullYear().toString(),
+                dates: dates,
+                startDate: start,
+                endDate: end,
+                weekNum: getWeekNumber(start),
+            });
+        }
+
+        startDate.setDate(startDate.getDate() + 7);
+    } while (startDate.getUTCFullYear().toString() == yearInput)   
 
     return weeks;
 }

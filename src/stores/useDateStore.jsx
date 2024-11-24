@@ -16,7 +16,7 @@ const useDateStore = create((set) => ({
     refreshConstructions: async (data) => {
         const { first, last } = getRange(data);
         const result = await getWorksByRange(first, last);
-        result.sort((a,b) => a.name < b.name)
+        result.sort((a,b) => a.code > b.code)
         set(() => ({
             constructions: result
         }));
