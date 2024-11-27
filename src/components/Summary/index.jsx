@@ -16,7 +16,7 @@ const tableVariants = {
 function SummaryWrapper({ title, children }) {
     return (
         <motion.div
-            className="flex flex-col border-[1px] border-[#555555] rounded-[3px] bg-white"
+            className="flex flex-col border-[1px] w-full border-[#555555] rounded-[3px] bg-white"
             variants={tableVariants}
             initial="initial"
             animate="active"
@@ -105,7 +105,7 @@ export default function Summary({ data }) {
 
                     <tr>
                         <td className="pl-2 text-sm font-bold">Total</td>
-                        <td className="pl-2 text-sm font-bold">
+                        <td className="text-sm font-bold p-2 text-center">
                             {toCurrency(constructions.reduce((acc, cons) => acc + Number(cons.total_value), 0))}
                         </td>
                     </tr>
@@ -131,7 +131,7 @@ export default function Summary({ data }) {
 
                     <tr>
                         <td className="pl-2 text-sm font-bold">Total</td>
-                        <td className="pl-2 text-sm font-bold">
+                        <td className="text-sm font-bold p-2 text-center">
                             {toCurrency(employees.reduce((acc, emp) => acc + Number(emp.total_value), 0))}
                         </td>
                     </tr>

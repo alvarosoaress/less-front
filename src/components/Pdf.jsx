@@ -10,6 +10,8 @@ import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 
 import { getWorksByRange } from "../service/apiService";
+import { getWeekNumber } from "../utils/day";
+import moment from "moment";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
     'pdfjs-dist/build/pdf.worker.min.mjs',
@@ -45,7 +47,7 @@ export default function Pdf({ startDate, endDate }) {
                     throw new Error("Erro ao baixar o arquivo");
                 }
                 const blob = await response.blob();
-                saveAs(blob, `relatorio_semanal_${startDate}_${endDate}.pdf`);
+                saveAs(blob, `EQUIPE - SEMANA ${getWeekNumber(moment.utc(startDate).toDate())}.pdf`);
             } catch (err) {
                 alert("Erro ao baixar o PDF");
             } finally {
@@ -56,6 +58,8 @@ export default function Pdf({ startDate, endDate }) {
 
     useEffect(() => {
         async function fetchData() {
+            setPageNumber(1)
+
             try {
                 const res = await getWorksByRange(startDate, endDate);
                 setHasData(res.length > 0);
