@@ -48,13 +48,15 @@ export default function ConstructionTable({ data, activeWeek }) {
     }
 
     let timer;
-    let touchDuration = 650;
+    let touchDuration = 1200;
 
     function onLongTouch() {
         timer = null;
         if(window.scrollY != initialY || openDeleteModal) return
         if(window.screen.width < 600 ) navigator.vibrate(100);
         setDeleteID(data.id);
+
+        document.body.classList.add('stop-scrolling');
         toggleDeleteModal();
     }
 

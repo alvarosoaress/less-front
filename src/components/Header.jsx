@@ -21,7 +21,7 @@ function getRouteName(pathname) {
             break;
 
         case "/edit-user":
-            return "Funcionários"
+            return "Pessoas"
             break;
 
         case "/teams":

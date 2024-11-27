@@ -57,8 +57,8 @@ export default function Report() {
 
     return (
         <div className="flex flex-col justify-between w-full h-full gap-2 p-3">
-            <div className="flex flex-col w-full h-full gap-3 px-3">
-                <div className="flex flex-col gap-2">
+            <div className="flex flex-col w-full h-full gap-2 px-3 overflow-y-scroll">
+                <div className="flex flex-col gap-1">
                     <label>Tipo de Relatório</label>
                     <Select
                         className="z-30"
@@ -68,7 +68,7 @@ export default function Report() {
                     />
                 </div>
 
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-1">
                     <label>Ano</label>
                     <Select
                         className="z-20"
@@ -80,7 +80,7 @@ export default function Report() {
                     />
                 </div>
 
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-1">
                     <label>Semana</label>
                     <Select
                         className="z-10"

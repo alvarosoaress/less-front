@@ -126,7 +126,7 @@ export default function ModalConstruction() {
             </div>
 
             <div className='w-full'>
-                <label>Funcionário(s):</label>
+                <label>Pessoa(s):</label>
                 <SelectEmployee 
                     onChange={setSelectedEmployees} 
                     value={selectedEmployees} 

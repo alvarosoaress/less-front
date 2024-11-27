@@ -17,7 +17,7 @@ const EmployeeCreate = ({ onClose, onEmployeeCreated }) => {
 
         const { data, error } = await supabase
             .from("employee")
-            .insert([{ name, role, daily_value: parseFloat(daily_value) }], {
+            .insert([{ name, role, color, color_text: textColor, daily_value: parseFloat(daily_value) }], {
                 returning: "minimal",
             });
 
@@ -48,7 +48,7 @@ const EmployeeCreate = ({ onClose, onEmployeeCreated }) => {
                 <TouchableButton onClick={onClose}>
                     <img className='rotate-180' width={30} src={ArrowIcon} />
                 </TouchableButton>
-                <h2 className="text-lg font-bold">Cadastrar Funcionário</h2>
+                <h2 className="text-lg font-bold">Cadastrar Pessoa</h2>
                 <span className='w-[30px]' />
             </header>
             <form onSubmit={handleSubmit} className='flex flex-col h-full gap-4 pt-5'>

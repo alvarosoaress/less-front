@@ -67,7 +67,7 @@ const Employee = () => {
         if (error) {
             setEmployeeInfo(null);
             setShowDeleteModal(false);
-            toast.error('Existem dados relacionados ao funcionário.')
+            toast.error('Existem dados relacionados à pessoa.')
         } else {
             setEmployees((prev) => prev.filter((e) => e.id !== employeeInfo.id));
             setEmployeeInfo(null);

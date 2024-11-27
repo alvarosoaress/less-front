@@ -28,14 +28,14 @@ const AddButtonModalTeam = ({ equipeId }) => {
             setEmployees(response.data);
         } catch (error) {
             console.error('Erro ao buscar funcionários:', error);
-            setErrorMessage('Erro ao buscar funcionários. Tente novamente.');
+            setErrorMessage('Erro ao buscar pessoas. Tente novamente.');
         }
     };
 
 
     const handleConfirm = async () => {
         if (!selectedEmployee) {
-            setErrorMessage('Por favor, selecione um funcionário.');
+            setErrorMessage('Por favor, selecione uma pessoa.');
             return;
         }
     
@@ -44,7 +44,7 @@ const AddButtonModalTeam = ({ equipeId }) => {
                 funcionarioId: selectedEmployee.id,
                 equipeId: equipeId // Passa o ID da equipe selecionada
             });
-            console.log('Funcionário adicionado à equipe com sucesso!', response.data);
+            console.log('Pessoa adicionado à equipe com sucesso!', response.data);
     
      
             setEmployees(prevEmployees => [

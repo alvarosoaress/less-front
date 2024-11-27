@@ -55,7 +55,7 @@ const appRoutes = [
     },
 
     {
-        name: "funcionários",
+        name: "Pessoas",
         path: "/edit-user",
         element: <Employee />,
         activeIcon: ActiveProfileIcon,

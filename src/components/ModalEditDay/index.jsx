@@ -114,7 +114,7 @@ export default function ModalEditDay() {
     return (
         <CustomModal isOpen={openEditDayModal} onRequestClose={toggleEditDayModal} top={top} >
             <div>
-                <p className='no-select'>Funcionário</p>
+                <p className='no-select'>Pessoas</p>
                 <SelectEmployee 
                     employees={employees} 
                     onChange={setSelectedEmployee} 

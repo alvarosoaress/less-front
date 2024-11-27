@@ -7,7 +7,7 @@ export default function WorkDay({ workDayData, timeWorkedExists, day, employeeID
     const [timeWorked, setTimeWorked] = useState(timeWorkedExists ? Number(workDayData.time_worked) : 0);
     const [initialY, setInitialY] = useState(0)
     const [loading, setLoading] = useState(false)
-    const times = [0, 1, 0.5, 2];
+    const times = [0, 1, 0.5];
 
     const { setEmployeeEdit, toggleEditDayModal, openEditDayModal} = useEmployeeModalStore();
     const { activeWeek, refreshConstructions } = useDateStore();
@@ -38,7 +38,7 @@ export default function WorkDay({ workDayData, timeWorkedExists, day, employeeID
     
 
     let timer;
-    let touchDuration = 650;
+    let touchDuration = 1200;
 
     function onLongTouch() {
         timer = null;

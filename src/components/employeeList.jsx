@@ -7,7 +7,7 @@ const SelectEmployee = ({ employees, onSelect }) => {
             const selectedEmployee = employees.find(emp => emp.id === selectedId);
             onSelect(selectedEmployee);
         }}>
-            <option value="">Selecione um funcionário</option>
+            <option value="">Selecione uma pessoa</option>
             {employees.map(employee => (
                 <option key={employee.id} value={employee.id}>
                     {employee.name}

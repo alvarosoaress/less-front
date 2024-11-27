@@ -10,9 +10,9 @@ export default function CustomModal({ children, isOpen, onRequestClose, customCl
         // Adiciona uma nova entrada no histórico quando o modal abre
         if (isOpen) {
             window.history.pushState(null, '', location.pathname);
-            document.body.classList.toggle('stop-scrolling');
+            document.body.classList.add('stop-scrolling');
         } else {
-            document.body.classList.toggle('stop-scrolling');
+            document.body.classList.remove('stop-scrolling');
         }
 
         const handlePopState = () => {

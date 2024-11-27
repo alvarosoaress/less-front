@@ -98,7 +98,7 @@ function App() {
     }, [activeWeek]);
 
     let timer;
-    let touchDuration = 500;
+    let touchDuration = 600;
 
     function onLongTouch() {
         timer = null;
@@ -136,7 +136,8 @@ function App() {
             toggleDeleteModal();
             refreshConstructions(activeWeek);
             
-            toast.success('Obra deletada.')
+            document.body.classList.remove('stop-scrolling');
+            toast.success('Obra deletada.');
             return res;
         } catch (error) {
             console.log(error)
@@ -149,9 +150,9 @@ function App() {
         // Adiciona uma nova entrada no histórico quando o modal abre
         if (openDeleteModal) {
             window.history.pushState(null, '', location.pathname);
-            document.body.classList.toggle('stop-scrolling');
+            document.body.classList.add('stop-scrolling');
         } else {
-            document.body.classList.toggle('stop-scrolling');
+            document.body.classList.remove('stop-scrolling');
         }
 
         const handlePopState = () => {
@@ -241,8 +242,12 @@ function App() {
                     </div>
 
                     {openDeleteModal && (
-                        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-                            <div className="max-w-sm p-8 bg-white rounded-lg shadow-lg">
+                        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+                            onClick={toggleDeleteModal}
+                        >
+                            <div className="max-w-sm p-8 bg-white rounded-lg shadow-lg"
+                                onClick={(e) => e.stopPropagation()}
+                            >
                                 <p className="mb-4 text-center text-gray-700">
                                     Tem certeza que deseja deletar esta obra?
                                 </p>

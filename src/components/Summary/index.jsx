@@ -54,7 +54,7 @@ function calculateTotals(data) {
             const empInd = totalsEmployee.findIndex((x) => employee.id_employee == x.id);
             const consInd = totalsConstructions.findIndex((x) => group.id == x.id);
 
-            if(empInd >= 0) {
+            if (empInd >= 0) {
                 totalsEmployee[empInd].total_value += total;
             } else {
                 totalsEmployee.push({
@@ -66,7 +66,7 @@ function calculateTotals(data) {
                 });
             }
 
-            if(consInd >= 0) {
+            if (consInd >= 0) {
                 totalsConstructions[consInd].total_value += total;
             } else {
                 totalsConstructions.push({
@@ -83,41 +83,60 @@ function calculateTotals(data) {
 };
 
 export default function Summary({ data }) {
-    const formattedData = data.map((x) => ({works: x.works, id: x.id, name: x.name, code: x.code}))
+    const formattedData = data.map((x) => ({ works: x.works, id: x.id, name: x.name, code: x.code }))
     const [constructions, employees] = calculateTotals(formattedData)
-
 
     return (
         <div className="flex justify-around gap-2">
-            <SummaryWrapper title={"Obras"} children={
-                constructions.sort((a,b) => a.code > b.code).map(cons => (
-                    <tr key={cons.id} className="odd:bg-[#F6F6F6]">
-                        <td className="w-20 h-10 px-2 text-center">
-                            <div className="flex items-center justify-center text-xs font-bold rounded-full w-7 h-7">
-                                {cons.code}
-                            </div>
-                        </td>
-                        <td className={`px-2 py-1 text-center`}>
-                            {toCurrency(cons.total_value)}
+            <SummaryWrapper title={"Obras"} children={(
+                <>
+                    {constructions.sort((a, b) => a.code > b.code).map(cons => (
+                        <tr key={cons.id} className="odd:bg-[#F6F6F6]">
+                            <td className="w-20 h-10 px-2 text-center">
+                                <div className="flex items-center justify-center text-xs font-bold rounded-full w-7 h-7">
+                                    {cons.code}
+                                </div>
+                            </td>
+                            <td className={`px-2 py-1 text-center`}>
+                                {toCurrency(cons.total_value)}
+                            </td>
+                        </tr>
+                    ))}
+
+                    <tr>
+                        <td className="pl-2 text-sm font-bold">Total</td>
+                        <td className="pl-2 text-sm font-bold">
+                            {toCurrency(constructions.reduce((acc, cons) => acc + Number(cons.total_value), 0))}
                         </td>
                     </tr>
-                ))
+                </>
+            )
             } />
 
-            <SummaryWrapper title={"Funcionários"} children={
-                employees.sort((a,b) => a.name > b.name).map(employee => (
-                    <tr key={employee.id} className="odd:bg-[#F6F6F6]">
-                        <td className="w-20 h-10 px-2 text-center">
-                            <div style={{ backgroundColor: employee.color, color: employee.color_text }}
-                                className="flex items-center justify-center text-xs font-bold rounded-full w-7 h-7">
-                                {shortName(employee.name)}
-                            </div>
-                        </td>
-                        <td className={`px-2 py-1 text-center`}>
-                            {toCurrency(employee.total_value)}
+            <SummaryWrapper title={"Pessoas"} children={(
+                <>
+                    {employees.sort((a, b) => a.name > b.name).map(employee => (
+                        <tr key={employee.id} className="odd:bg-[#F6F6F6]">
+                            <td className="w-20 h-10 px-2 text-center">
+                                <div style={{ backgroundColor: employee.color, color: employee.color_text }}
+                                    className="flex items-center justify-center text-xs font-bold rounded-full w-7 h-7">
+                                    {shortName(employee.name)}
+                                </div>
+                            </td>
+                            <td className={`px-2 py-1 text-center`}>
+                                {toCurrency(employee.total_value)}
+                            </td>
+                        </tr>
+                    ))}
+
+                    <tr>
+                        <td className="pl-2 text-sm font-bold">Total</td>
+                        <td className="pl-2 text-sm font-bold">
+                            {toCurrency(employees.reduce((acc, emp) => acc + Number(emp.total_value), 0))}
                         </td>
                     </tr>
-                ))
+                </>
+            )
             } />
         </div>
     )

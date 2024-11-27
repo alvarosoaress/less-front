@@ -75,7 +75,7 @@ const EmployeeEdit = ({ employeeId, onClose, onEmployeeUpdated }) => {
                 <TouchableButton onClick={onClose}>
                     <img className='rotate-180' width={30} src={ArrowIcon} />
                 </TouchableButton>
-                <h2 className="text-lg font-bold">Editar Funcionário</h2>
+                <h2 className="text-lg font-bold">Editar Pessoa</h2>
                 <span className='w-[30px]' />
             </header>
             <form onSubmit={handleUpdate} className='flex flex-col h-full gap-4 pt-5'>
