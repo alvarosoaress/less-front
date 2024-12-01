@@ -47,7 +47,7 @@ export default function Pdf({ startDate, endDate }) {
                     throw new Error("Erro ao baixar o arquivo");
                 }
                 const blob = await response.blob();
-                saveAs(blob, `EQUIPE - SEMANA ${getWeekNumber(moment.utc(startDate).toDate())}.pdf`);
+                saveAs(blob, `EQUIPE - SEMANA ${getWeekNumber(moment(startDate).toDate())}.pdf`);
             } catch (err) {
                 alert("Erro ao baixar o PDF");
             } finally {
