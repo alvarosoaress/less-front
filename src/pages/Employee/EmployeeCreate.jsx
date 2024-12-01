@@ -17,7 +17,7 @@ const EmployeeCreate = ({ onClose, onEmployeeCreated }) => {
 
         const { data, error } = await supabase
             .from("employee")
-            .insert([{ name, role, color, color_text: textColor, daily_value: parseFloat(daily_value) }], {
+            .insert([{ name, role, color, color_text: textColor, daily_value: parseFloat(daily_value) || 0 }], {
                 returning: "minimal",
             });
 

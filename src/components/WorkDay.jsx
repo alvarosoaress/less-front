@@ -1,16 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useRef, useState } from "react";
 import { putWork } from "../service/apiService";
 import useEmployeeModalStore from "../stores/useEmployeeModalStore";
 import useDateStore from "../stores/useDateStore";
 
 export default function WorkDay({ workDayData, timeWorkedExists, day, employeeID, constructionID}) {
     const [timeWorked, setTimeWorked] = useState(timeWorkedExists ? Number(workDayData.time_worked) : 0);
-    const [initialY, setInitialY] = useState(0)
+    const initialY = useRef(0)
     const [loading, setLoading] = useState(false)
     const times = [0, 1, 0.5];
 
     const { setEmployeeEdit, toggleEditDayModal, openEditDayModal} = useEmployeeModalStore();
     const { activeWeek, refreshConstructions } = useDateStore();
+
+    const $day = useRef(null)
 
     const handleSetTimeWorked = async () => {
         if(loading) return
@@ -37,12 +39,17 @@ export default function WorkDay({ workDayData, timeWorkedExists, day, employeeID
     }, [workDayData])
     
 
-    let timer;
-    let touchDuration = 1200;
+    let timer = useRef(null);
+    const touchDuration = 850;
 
     function onLongTouch() {
-        timer = null;
-        if(window.scrollY != initialY || openEditDayModal) return
+        $day.current.style.boxShadow = ''
+        timer.current = null;
+        if(
+            window.scrollY != initialY.current || 
+            openEditDayModal || 
+            document.getElementById('mainContainer').style.transform != 'none'
+        )  return
         if(window.screen.width < 600 ) navigator.vibrate(100);
         setEmployeeEdit({workDayData, employeeID, constructionID, day});
         toggleEditDayModal();
@@ -50,17 +57,19 @@ export default function WorkDay({ workDayData, timeWorkedExists, day, employeeID
 
     function touchstart(e) {
         e.preventDefault();
-        setInitialY(window.scrollY);
+        initialY.current = window.scrollY;
+        $day.current.style.boxShadow = 'rgba(0, 0, 0, 0.24) 0px 3px 8px'
         
-        if (!timer) {
-            timer = setTimeout(onLongTouch, touchDuration);
+        if (!timer.current) {
+            timer.current = setTimeout(onLongTouch, touchDuration);
         }
     }
 
     function touchend() {
-        if (timer) {
-            clearTimeout(timer);
-            timer = null;
+        $day.current.style.boxShadow = ''
+        if (timer.current) {
+            clearTimeout(timer.current);
+            timer.current = null;
         }
     }
 
@@ -71,11 +80,12 @@ export default function WorkDay({ workDayData, timeWorkedExists, day, employeeID
 
     return (
         <td
-            className={`${loading ? 'opacity-20' : ''} px-2 py-1 text-center cursor-pointer`}
+            className={`${loading ? 'opacity-20' : ''} px-2 py-1 text-center cursor-pointer transition-all`}
             onClick={handleSetTimeWorked}
             onTouchStart={touchstart}
             onTouchEnd={touchend}
-            onContextMenu={handleContextMenu}
+            onContextMenuCapture={handleContextMenu}
+            ref={$day}
         >
             {timeWorked ? timeWorked : ""}
         </td>

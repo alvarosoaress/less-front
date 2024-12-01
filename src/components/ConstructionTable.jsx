@@ -2,15 +2,13 @@ import { shortenedDay, getRange } from "../utils/day";
 import WorkDay from "./WorkDay";
 
 import useEmployeeModalStore from "../stores/useEmployeeModalStore";
-import { deleteFullConstruction, getUnallocatedEmployeesByConstruction } from "../service/apiService";
+import { getUnallocatedEmployeesByConstruction } from "../service/apiService";
 import { shortName } from "../utils/employee";
-
-import TrashIcon from "../assets/icons/trash.svg"
 
 import { motion } from "framer-motion";
 import moment from "moment";
 import useDeleteModalStore from "../stores/useDeleteModalStore";
-import { useState } from "react";
+import { useRef } from "react";
 
 const tableVariants = {
     initial: {
@@ -27,7 +25,7 @@ const tableVariants = {
 export default function ConstructionTable({ data, activeWeek }) {
     const { toggleEmployeeModal, setEmployees, openEmployeeModal } = useEmployeeModalStore()
     const { toggleDeleteModal, openDeleteModal, setDeleteID } = useDeleteModalStore()
-    const [initialY, setInitialY] = useState(0)
+    const initialY = useRef(0)
 
     const handleAddEmployee = async () => {
         if(openEmployeeModal) return
@@ -47,12 +45,12 @@ export default function ConstructionTable({ data, activeWeek }) {
         setEmployees(result);
     }
 
-    let timer;
-    let touchDuration = 1200;
+    let timer = useRef(null);
+    const touchDuration = 850;
 
     function onLongTouch() {
-        timer = null;
-        if(window.scrollY != initialY || openDeleteModal) return
+        timer.current = null;
+        if(window.scrollY != initialY.current || openDeleteModal || document.getElementById('mainContainer').style.transform.includes('translate')) return
         if(window.screen.width < 600 ) navigator.vibrate(100);
         setDeleteID(data.id);
 
@@ -62,17 +60,17 @@ export default function ConstructionTable({ data, activeWeek }) {
 
     function touchstart(e) {
         e.preventDefault();
-        setInitialY(window.scrollY);
+        initialY.current = window.scrollY;
 
-        if (!timer) {
-            timer = setTimeout(onLongTouch, touchDuration);
+        if (!timer.current) {
+            timer.current = setTimeout(onLongTouch, touchDuration);
         }
     }
 
     function touchend() {
-        if (timer) {
-            clearTimeout(timer);
-            timer = null;
+        if (timer.current) {
+            clearTimeout(timer.current);
+            timer.current = null;
         }
     }
 

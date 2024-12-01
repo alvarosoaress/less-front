@@ -195,6 +195,7 @@ function App() {
                     drag={openDeleteModal ? false : "x"}
                     dragConstraints={{ left: 0, right: 0 }}
                     onDragEnd={(_, info) => handleDrag(info)}
+                    id="mainContainer"
                 >
                     <Calendar
                         tileClassName={
