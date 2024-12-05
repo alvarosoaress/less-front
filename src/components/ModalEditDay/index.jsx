@@ -10,7 +10,7 @@ import { getRange } from '../../utils/day';
 import useDateStore from '../../stores/useDateStore';
 
 export default function ModalEditDay() {
-    const { openEditDayModal, toggleEditDayModal, employeeEdit } = useEmployeeModalStore();
+    const { openEditDayModal, closeEditDayModal, employeeEdit } = useEmployeeModalStore();
     const { activeWeek, refreshConstructions } = useDateStore();
     const { workDayData, constructionID, employeeID, day } = employeeEdit;
     const top = window.scrollY
@@ -92,7 +92,7 @@ export default function ModalEditDay() {
             await putWorkFull(workDayData.id_work, price, workDay)
 
             refreshConstructions(activeWeek)
-            toggleEditDayModal();
+            closeEditDayModal();
         } catch (error) {
             console.log(error.message);
         }
@@ -103,7 +103,7 @@ export default function ModalEditDay() {
             await deleteEmpWork(employeeID, day, constructionID)
 
             refreshConstructions(activeWeek)
-            toggleEditDayModal();
+            closeEditDayModal();
         } catch (error) {
             console.log(error.message);
         }
@@ -112,7 +112,7 @@ export default function ModalEditDay() {
     const total = price * workDay;
 
     return (
-        <CustomModal isOpen={openEditDayModal} onRequestClose={toggleEditDayModal} top={top} >
+        <CustomModal isOpen={openEditDayModal} onRequestClose={closeEditDayModal} top={top} >
             <div>
                 <p className='no-select'>Pessoas</p>
                 <SelectEmployee 
